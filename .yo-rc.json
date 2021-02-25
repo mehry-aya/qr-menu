@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.qrmenu"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "QRMenu",
+    "packageName": "com.qrmenu",
+    "packageFolder": "com/qrmenu",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZjY3M2Y5ZGJjMzhkNGZkZGUyM2JlNzNlMDFlZDk4NmJkODc1MTVkMTc0ZjFlMDNjYmExOGE3Y2E5ZjcyMGJhODY1NWVhYjY0YTg5MTU0YzQ1NGFiM2NhZGFiYjU0NzY5OTA2NDAwNDBlYTQ2MGEwYjkwNzQ0MDUwNjQyMzAxOTc=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "simplex",
+    "clientThemeVariant": "light",
+    "creationTimestamp": 1614285940631,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
