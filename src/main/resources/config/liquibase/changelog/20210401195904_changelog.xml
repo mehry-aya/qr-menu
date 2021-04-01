@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Aya (generated)" id="1617307177775-1">
+        <addColumn tableName="product">
+            <column name="digital_menu_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1617307177775-2">
+        <addForeignKeyConstraint baseColumnNames="digital_menu_id" baseTableName="product" constraintName="FKh923pxu8c6w4e6n13mnehypoj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="digital_menu" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
