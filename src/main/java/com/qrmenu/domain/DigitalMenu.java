@@ -1,11 +1,9 @@
 package com.qrmenu.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,20 +15,20 @@ public class DigitalMenu extends Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "digitalMenu")
-    @JsonIgnoreProperties(value = { "digitalMenu"}, allowSetters = true)
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "digitalMenu", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonManagedReference
+    private List<Product> products ;
 
 
     public DigitalMenu() {
     }
 
-    public List<Product> getProduct() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProduct(List<Product> product) {
-        this.products = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {
@@ -44,9 +42,8 @@ public class DigitalMenu extends Menu implements Serializable {
     @Override
     public String toString() {
         return "DigitalMenu{" +
-
-            ", product='" + products + '\'' +
-
+            "id=" + id +
+            ", products=" + products +
             '}';
     }
 }

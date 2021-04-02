@@ -31,9 +31,8 @@ public class ProductResource  {
         return ResponseEntity.ok(this.productService.addProduct(products));
 }
 @GetMapping("/getone/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable long id, @RequestBody Product products){
-    Optional <Product> product = this.productRepository.findById(id);
-    return ResponseEntity.ok(this.productService.getProduct(product.get()));
+    public ResponseEntity<Product> getProduct(@PathVariable long id){
+    return ResponseEntity.ok(this.productService.getProduct(id));
 }
 @GetMapping("/all")
     public ResponseEntity<List<Product>> findAllProducts(){

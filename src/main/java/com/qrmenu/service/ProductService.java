@@ -28,8 +28,8 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
-    public Product getProduct(Product products){
-        return this.productRepository.getOne(products.getId());
+    public Product getProduct(Long id){
+        return this.productRepository.getOne(id);
     }
 
     public Product updateProduct(Product products){

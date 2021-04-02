@@ -1,7 +1,7 @@
 package com.qrmenu.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -31,7 +31,7 @@ public class Product implements Serializable {
     private String image;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "products"}, allowSetters = true)
+    @JsonBackReference
     private DigitalMenu digitalMenu;
 
 

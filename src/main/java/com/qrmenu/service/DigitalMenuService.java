@@ -36,7 +36,7 @@ public class DigitalMenuService {
         Optional<DigitalMenu> optionalDigitalMenu = this.digitalMenuRepository.findById(digitalMenus.getId());
         if (optionalDigitalMenu.isPresent()) {
             DigitalMenu digitalMenu = optionalDigitalMenu.get();
-            digitalMenu.setProduct(digitalMenus.getProduct());
+            digitalMenu.setProducts(digitalMenus.getProducts());
             digitalMenu.setCategory(digitalMenus.getCategory());
             return this.digitalMenuRepository.save(digitalMenu);
         } else {
