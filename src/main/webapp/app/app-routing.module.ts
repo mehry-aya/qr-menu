@@ -27,28 +27,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'menu-management',
-          data: {
-            authorities: [Authority.USER],
-          },
-          canActivate: [UserRouteAccessService],
           loadChildren: () => import('./menu-management/menu-management.module').then(m => m.MenuManagementModule),
-        },
-        {
-          path: 'menu-file',
-          data: {
-            authorities: [Authority.USER],
-          },
-          canActivate: [UserRouteAccessService],
-          loadChildren: () => import('./menu-management/menu-file/menu-file.module').then(m => m.MenuFileModule),
-        },
-
-        {
-          path: 'digital-menu',
-          data: {
-            authorities: [Authority.USER],
-          },
-          canActivate: [UserRouteAccessService],
-          loadChildren: () => import('./menu-management/digital-menu/digital-menu.module').then(m => m.DigitalMenuModule),
         },
 
         ...LAYOUT_ROUTES,

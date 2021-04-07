@@ -3,10 +3,12 @@ package com.qrmenu.service.dto;
 import com.qrmenu.config.Constants;
 
 import com.qrmenu.domain.Authority;
+import com.qrmenu.domain.Establishment;
 import com.qrmenu.domain.User;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,6 +42,8 @@ public class UserDTO {
     @Size(min = 2, max = 10)
     private String langKey;
 
+    private List<Establishment> establishments;
+
     private String createdBy;
 
     private Instant createdDate;
@@ -67,9 +71,18 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.establishments= user.getEstablishments();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+    }
+
+    public List<Establishment> getEstablishments() {
+        return establishments;
+    }
+
+    public void setEstablishments(List<Establishment> establishments) {
+        this.establishments = establishments;
     }
 
     public Long getId() {

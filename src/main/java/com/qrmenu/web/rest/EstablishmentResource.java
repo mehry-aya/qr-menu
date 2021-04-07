@@ -29,10 +29,9 @@ public class EstablishmentResource {
     public ResponseEntity<Establishment> createEstablishment(@Valid @RequestBody Establishment establishments){
         return ResponseEntity.ok(this.establishmentService.addEstablishment(establishments));
 }
-@GetMapping("/getone/{id}")
-    public ResponseEntity<Establishment> getEstablishment(@PathVariable long id, @RequestBody Establishment establishments){
-    Optional<Establishment> establishment = this.establishmentRepository.findById(id);
-        return ResponseEntity.ok(this.establishmentService.getEstablishment(establishment.get()));
+@GetMapping("/{id}")
+    public ResponseEntity<Establishment> getEstablishment(@PathVariable long id){
+        return ResponseEntity.ok(this.establishmentService.getEstablishment(id));
 }
 @GetMapping("/all")
     public ResponseEntity<List<Establishment>> getAllEstablishment (){

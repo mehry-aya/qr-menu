@@ -29,8 +29,8 @@ public class EstablishmentService {
         return this.establishmentRepository.findAll();
     }
 
-    public Establishment getEstablishment( Establishment establishments){
-        return this.establishmentRepository.getOne(establishments.getId());
+    public Establishment getEstablishment(long id){
+        return this.establishmentRepository.getOne(id);
     }
 
     public Establishment updateEstablishment(Establishment establishments){

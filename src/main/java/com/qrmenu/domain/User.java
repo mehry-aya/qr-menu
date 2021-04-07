@@ -1,5 +1,6 @@
 package com.qrmenu.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.qrmenu.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,8 +15,10 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
 
 /**
  * A user.
@@ -80,6 +83,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonManagedReference
+    private List<Establishment> establishments;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -89,6 +96,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    public List<Establishment> getEstablishments() {
+        return establishments;
+    }
+
+    public void setEstablishments(List<Establishment> establishments) {
+        this.establishments = establishments;
+    }
 
     public Long getId() {
         return id;
@@ -210,6 +224,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public int hashCode() {
         return 31;
     }
+
+
 
     // prettier-ignore
     @Override
