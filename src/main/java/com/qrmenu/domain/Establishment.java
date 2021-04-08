@@ -1,5 +1,7 @@
 package com.qrmenu.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,10 +38,8 @@ public class Establishment  implements Serializable {
     private String logo;
 
     @ManyToOne
-    @JoinTable(name = "establishment_user",
-        joinColumns = {@JoinColumn(name = "id_establishment", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")})
-        private User user ;
+    @JsonBackReference
+    private User user;
 
     public Establishment(){
 
@@ -52,6 +52,14 @@ public class Establishment  implements Serializable {
         this.contact = contact;
         this.category = category;
         this.logo = logo;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -111,6 +119,7 @@ public class Establishment  implements Serializable {
             ", contact='" + contact + '\'' +
             ", category='" + category + '\'' +
             ", logo='" + logo + '\'' +
+
             '}';
     }
 }
