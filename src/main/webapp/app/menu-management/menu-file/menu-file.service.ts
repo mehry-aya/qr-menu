@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IMenuFiles } from './menu-files.model';
+import { IMenuFiles, MenuFiles } from './menu-files.model';
 import { SERVER_API_URL } from '../../app.constants';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class MenuFileService {
   constructor(private http: HttpClient) {}
 
   public addMenuFile(menuFile: IMenuFiles): Observable<IMenuFiles> {
-    return this.http.post<IMenuFiles>(this.apiServerUrl, menuFile);
+    return this.http.post<IMenuFiles>(this.apiServerUrl + '/add', menuFile);
   }
 
   public getMenuFiles(id: number): Observable<IMenuFiles> {
@@ -25,10 +25,10 @@ export class MenuFileService {
   }
 
   public deleteMenuFile(id: number): Observable<{}> {
-    return this.http.delete(`${this.apiServerUrl}/${id}`);
+    return this.http.delete(`${this.apiServerUrl}/delete/${id}`);
   }
 
-  public getAllMenu(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiServerUrl + '/all');
+  public getAllMenu(): Observable<MenuFiles[]> {
+    return this.http.get<MenuFiles[]>(this.apiServerUrl + '/all');
   }
 }

@@ -2,10 +2,10 @@ import { Route } from '@angular/router';
 import { MenuFileComponent } from './menu-file.component';
 
 export const MENU_FILE_ROUTE: Route = {
-  path: '',
+  path: 'menu-file',
   component: MenuFileComponent,
   data: {
     authorities: [],
-    pageTitle: 'Welcome, Java Hipster!',
+    pageTitle: 'Menu Files',
   },
 };

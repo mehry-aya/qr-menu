@@ -12,7 +12,7 @@ public class MenuFilesDTO {
     private String category;
 
     @Size(max = 256)
-    private String imageUrl;
+    private String image;
 
     public Long getId() {
         return id;
@@ -30,12 +30,12 @@ public class MenuFilesDTO {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String imageUrl) {
+        this.image = image;
     }
 
 

@@ -1,11 +1,12 @@
-import { Route } from '@angular/router';
-import { MenuManagementComponent } from './menu-management.component';
+import { Routes } from '@angular/router';
+import { MENU_FILE_ROUTE } from './menu-file/menu-file.route';
+import { DIGITAL_MENU_ROUTE } from './digital-menu/digital-menu.route';
 
-export const MENU_MANAGEMENT_ROUTE: Route = {
-  path: '',
-  component: MenuManagementComponent,
-  data: {
-    authorities: [],
-    pageTitle: 'Welcome, Java Hipster!',
+const MENU_MANAGEMENT_ROUTES = [MENU_FILE_ROUTE, DIGITAL_MENU_ROUTE];
+
+export const MENU_MANAGEMENT_ROUTE: Routes = [
+  {
+    path: '',
+    children: MENU_MANAGEMENT_ROUTES,
   },
-};
+];

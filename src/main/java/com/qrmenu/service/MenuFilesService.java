@@ -34,7 +34,7 @@ public class MenuFilesService {
             if (optionalMenuFiles.isPresent()) {
                 MenuFiles menuFile = optionalMenuFiles.get();
                 menuFile.setCategory(menuFiles.getCategory());
-                menuFile.setImageUrl(menuFiles.getImageUrl());
+                menuFile.setImage(menuFiles.getImage());
                 return this.menuFilesRepository.save(menuFile);
             } else {
                 throw new NotFoundObjectException();

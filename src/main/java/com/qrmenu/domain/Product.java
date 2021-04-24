@@ -30,6 +30,9 @@ public class Product implements Serializable {
     @Column(name = "image", length = 256)
     private String image;
 
+    @Column(name = "rating")
+    private Long rating;
+
     @ManyToOne
     @JsonBackReference
     private DigitalMenu digitalMenu;
@@ -38,12 +41,13 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(long id, @Size(min = 1, max = 256) String name, float price, @Size(min = 1, max = 256) String description, @Size(min = 1, max = 256) String image) {
+    public Product(long id, @Size(min = 1, max = 256) String name, float price, @Size(min = 1, max = 256) String description, @Size(min = 1, max = 256) String image, Long rating) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.image = image;
+        this.rating= rating;
     }
 
     public DigitalMenu getDigitalMenu() {
@@ -64,6 +68,14 @@ public class Product implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Long getRating() {
+        return rating;
+    }
+
+    public void setRating(Long rating) {
+        this.rating = rating;
     }
 
     public void setName(String name) {
@@ -102,6 +114,7 @@ public class Product implements Serializable {
             ", price=" + price +
             ", description='" + description + '\'' +
             ", image='" + image + '\'' +
+            ", rating='" + rating + '\'' +
             '}';
     }
 }

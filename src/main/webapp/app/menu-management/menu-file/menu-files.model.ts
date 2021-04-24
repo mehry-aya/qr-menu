@@ -1,9 +1,10 @@
 export interface IMenuFiles {
-  id_menu: number;
+  id?: number;
   category: string;
-  imageUrl: string;
+  image: string;
+  logo: string;
 }
 
 export class MenuFiles implements IMenuFiles {
-  constructor(public id_menu: number, public category: string, public imageUrl: string) {}
+  constructor(public category: string, public image: string, public logo: string, public id?: number) {}
 }

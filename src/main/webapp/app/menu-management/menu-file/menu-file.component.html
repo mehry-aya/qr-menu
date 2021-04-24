@@ -1,1 +1,50 @@
-<p>menu-file works!</p>
+<div class="container">
+    <form [formGroup] = "menuForm">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input formControlName="category" type="text" class="form-control" id="category" aria-describedby="emailHelp" placeholder="category">
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="logo">logo</label>
+                <input formControlName="logo" type="text" class="form-control" id="logo" aria-describedby="emailHelp" placeholder="Logo">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input formControlName="image" type="text" class="form-control" id="image" aria-describedby="emailHelp" placeholder="image">
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <button type="button" (click)="ajouterMenuFile()" class="btn btn-outline-success" [disabled]="menuForm.invalid">Ajouter</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div *ngFor="let menu of menuList" class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img
+                    class="card-img-top"
+                    src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-businessman-avatar-cartoon-style-png-image_5234654.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">{{menu.category}}</h5>
+                    <a class="btn btn-outline-danger" (click)="delete(menu.id)">Supprimer</a>
+                    <a class="btn btn-outline-success">Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -40,6 +40,7 @@ public class ProductService {
             product.setDescription(products.getDescription());
             product.setPrice(products.getPrice());
             product.setImage(products.getImage());
+            product.setRating(products.getRating());
             return this.productRepository.save(product);
         }else{
             throw new NotFoundObjectException();
