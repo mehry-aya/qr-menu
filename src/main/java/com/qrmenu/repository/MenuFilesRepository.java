@@ -8,8 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface MenuFilesRepository extends JpaRepository <MenuFiles, Long> {
 
 
-
-    // void deleteByCategory(String category);
-
-    //void deleteMenuFile(long id_menu);
 }

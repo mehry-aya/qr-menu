@@ -50,8 +50,8 @@ public class MenuFilesService {
 
         }
 
-    public MenuFiles getMenuFile(MenuFiles menuFiles) {
-            return this.menuFilesRepository.getOne(menuFiles.getId());
+    public MenuFiles getMenuFile(long id) {
+            return this.menuFilesRepository.getOne(id);
     }
 
 }

@@ -1,0 +1,56 @@
+<div class="container">
+    <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" role="form">
+        <h2>Edit Menu File</h2>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input class="form-control" formControlName="category" id="category" name="category"
+                           placeholder="category"
+                           type="text">
+                    <div
+                        *ngIf="editForm.get('category')!.invalid && (editForm.get('category')!.dirty || editForm.get('category')!.touched)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+
+                <div class="form-group">
+                    <label for="logo">logo</label>
+                    <input class="form-control" formControlName="logo" id="logo" name="logo" placeholder="Logo"
+                           type="text">
+                    <div
+                        *ngIf="editForm.get('logo')!.invalid && (editForm.get('logo')!.dirty || editForm.get('logo')!.touched)">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input class="form-control" formControlName="image" id="image" name="image" placeholder="image"
+                           type="text">
+
+                    <div
+                        *ngIf="editForm.get('image')!.invalid && (editForm.get('image')!.dirty || editForm.get('image')!.touched)">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-outline-success" type="submit">Save
+                    Changes
+                </button>
+                <button (click)="previousState()"> Return</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

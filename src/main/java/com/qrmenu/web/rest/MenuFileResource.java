@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/menu-files")
@@ -38,17 +37,15 @@ public class MenuFileResource {
 
     }
 
-   @PutMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<MenuFiles> updateMenu(@RequestBody MenuFiles menuFiles) {
         return ResponseEntity.ok(this.menuFilesService.updateMenuFile(menuFiles));
 
     }
 
-    @GetMapping("/getone/{id_menu}")
-    public ResponseEntity<MenuFiles> getMenuFile(@PathVariable("id_menu")long id_menu, @RequestBody MenuFilesDTO menuFilesDTO) {
-       Optional <MenuFiles> menuFiles = this.menuFilesRepository.findById(id_menu);
-       this.menuFilesMapper.menuFilesDTOMenuFiles(menuFilesDTO);
-        return ResponseEntity.ok(this.menuFilesService.getMenuFile(menuFiles.get()));
+    @GetMapping("/getone/{id}")
+    public ResponseEntity<MenuFiles> getMenuFile(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.menuFilesService.getMenuFile(id));
     }
 
     @GetMapping("/all")
@@ -56,9 +53,9 @@ public class MenuFileResource {
         return ResponseEntity.ok(this.menuFilesService.findAllMenuFiles());
     }
 
-   @DeleteMapping("/delete/{id_menu}")
-    public ResponseEntity<HttpStatus> deleteMenuFile(@PathVariable("id_menu") long id_menu) {
-        this.menuFilesRepository.deleteById(id_menu);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteMenuFile(@PathVariable("id") long id) {
+        this.menuFilesRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

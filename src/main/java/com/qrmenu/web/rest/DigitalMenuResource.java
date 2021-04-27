@@ -32,7 +32,7 @@ public class DigitalMenuResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DigitalMenu> getDigitalMenu(@PathVariable long id) {
+    public ResponseEntity<DigitalMenu> getDigitalMenu(@PathVariable("id") long id) {
         return ResponseEntity.ok(this.digitalMenuService.getDigitalMenu(id));
     }
 
@@ -47,7 +47,7 @@ public class DigitalMenuResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteDigitalMenu(@PathVariable long id) {
+    public ResponseEntity<HttpStatus> deleteDigitalMenu(@PathVariable("id") long id) {
         this.digitalMenuRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

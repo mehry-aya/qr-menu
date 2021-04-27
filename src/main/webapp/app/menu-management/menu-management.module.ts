@@ -5,10 +5,10 @@ import { MenuFileComponent } from 'app/menu-management/menu-file/menu-file.compo
 import { DigitalMenuComponent } from 'app/menu-management/digital-menu/digital-menu.component';
 import { QrMenuSharedModule } from 'app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EditMenuFileComponent } from 'app/menu-management/menu-file/edit-Menu-file';
+import { EditMenuFileModule } from 'app/menu-management/menu-file/edit-menu-file/edit-menu-file.module';
 
 @NgModule({
-  declarations: [MenuFileComponent, DigitalMenuComponent, EditMenuFileComponent],
-  imports: [QrMenuSharedModule, ReactiveFormsModule, RouterModule.forChild(MENU_MANAGEMENT_ROUTE)],
+  imports: [QrMenuSharedModule, ReactiveFormsModule, EditMenuFileModule, RouterModule.forChild(MENU_MANAGEMENT_ROUTE)],
+  declarations: [MenuFileComponent, DigitalMenuComponent],
 })
 export class MenuManagementModule {}

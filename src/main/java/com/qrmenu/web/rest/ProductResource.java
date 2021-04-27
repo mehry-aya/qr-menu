@@ -31,7 +31,7 @@ public class ProductResource  {
         return ResponseEntity.ok(this.productService.addProduct(products));
 }
 @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable long id){
+    public ResponseEntity<Product> getProduct(@PathVariable("id") long id){
     return ResponseEntity.ok(this.productService.getProduct(id));
 }
 @GetMapping("/all")
@@ -43,7 +43,7 @@ public ResponseEntity <Product> updateProduct(@RequestBody Product products){
         return ResponseEntity.ok(this.productService.updateProduct(products));
 }
 @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable long id, @RequestBody Product products){
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id){
           this.productRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 }

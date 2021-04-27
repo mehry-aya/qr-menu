@@ -16,12 +16,12 @@ export class MenuFileService {
     return this.http.post<IMenuFiles>(this.apiServerUrl + '/add', menuFile);
   }
 
-  public getMenuFiles(id: number): Observable<IMenuFiles> {
-    return this.http.get<IMenuFiles>(`${this.apiServerUrl}/${id}`);
+  public getMenuFile(id: number): Observable<IMenuFiles> {
+    return this.http.get<IMenuFiles>(`${this.apiServerUrl}/getone/${id}`);
   }
 
   public updateMenuFile(menuFile: IMenuFiles): Observable<IMenuFiles> {
-    return this.http.put<IMenuFiles>(this.apiServerUrl, menuFile);
+    return this.http.put<IMenuFiles>(this.apiServerUrl + '/update', menuFile);
   }
 
   public deleteMenuFile(id: number): Observable<{}> {

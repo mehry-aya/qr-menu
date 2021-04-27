@@ -4,14 +4,14 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label for="category">Category</label>
-                <input formControlName="category" type="text" class="form-control" id="category" aria-describedby="emailHelp" placeholder="category">
+                <input formControlName="category" type="text" class="form-control" id="category"  placeholder="category">
             </div>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="logo">logo</label>
-                <input formControlName="logo" type="text" class="form-control" id="logo" aria-describedby="emailHelp" placeholder="Logo">
+                <input formControlName="logo" type="text" class="form-control" id="logo" placeholder="Logo">
             </div>
         </div>
     </div>
@@ -19,29 +19,35 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label for="image">Image</label>
-                <input formControlName="image" type="text" class="form-control" id="image" aria-describedby="emailHelp" placeholder="image">
+                <input formControlName="image" type="text" class="form-control" id="image"  placeholder="image">
             </div>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5">
-            <button type="button" (click)="ajouterMenuFile()" class="btn btn-outline-success" [disabled]="menuForm.invalid">Ajouter</button>
+            <button type="button" (click)="add()" class="btn btn-outline-success" [disabled]="menuForm.invalid">Ajouter</button>
         </div>
     </div>
     </form>
 </div>
 
-
 <div class="container">
     <div class="row">
         <div *ngFor="let menu of menuList" class="col-md-3">
-            <div class="card" style="width: 18rem;">
+            <div class="card" >
                 <img
                     class="card-img-top"
                     src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-businessman-avatar-cartoon-style-png-image_5234654.jpg">
                 <div class="card-body">
                     <h5 class="card-title">{{menu.category}}</h5>
-                    <a class="btn btn-outline-danger" (click)="delete(menu.id)">Supprimer</a>
-                    <a class="btn btn-outline-success">Modifier</a>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(menu.id)">
+                    <span class="d-none d-md-inline">Delete</span>
+                    </button>
+                    <button type="submit"
+                            [routerLink]="[menu.id, 'edit']"
+                            queryParamsHandling="merge"
+                            class="btn btn-primary btn-sm">
+                        <span class="d-none d-md-inline">Edit</span>
+                    </button>
                 </div>
             </div>
         </div>

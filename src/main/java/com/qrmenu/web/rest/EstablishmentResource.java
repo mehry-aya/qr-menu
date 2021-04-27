@@ -30,7 +30,7 @@ public class EstablishmentResource {
         return ResponseEntity.ok(this.establishmentService.addEstablishment(establishments));
 }
 @GetMapping("/{id}")
-    public ResponseEntity<Establishment> getEstablishment(@PathVariable long id){
+    public ResponseEntity<Establishment> getEstablishment(@PathVariable("id") long id){
         return ResponseEntity.ok(this.establishmentService.getEstablishment(id));
 }
 @GetMapping("/all")
@@ -42,7 +42,7 @@ public class EstablishmentResource {
         return ResponseEntity.ok(this.establishmentService.updateEstablishment(establishments));
 }
 @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deteteEstablishment (@PathVariable long id, @RequestBody Establishment establishments){
+    public ResponseEntity<HttpStatus> deleteEstablishment (@PathVariable("id") long id){
         this.establishmentRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 }
