@@ -30,7 +30,7 @@ public class ProductResource  {
     public ResponseEntity<Product> addProduct(@Valid @RequestBody Product products)   {
         return ResponseEntity.ok(this.productService.addProduct(products));
 }
-@GetMapping("/{id}")
+@GetMapping("/getone/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable("id") long id){
     return ResponseEntity.ok(this.productService.getProduct(id));
 }

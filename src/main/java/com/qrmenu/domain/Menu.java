@@ -1,66 +1,40 @@
 package com.qrmenu.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Lob;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Arrays;
 
 @MappedSuperclass
-public abstract class Menu implements Serializable {
+public abstract class Menu extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Column
+    private String name;
 
-    @Size(min = 3, max = 256)
-    @Column(name = "category", length = 256)
-    private String category;
+    @Column
+    private Boolean isActivated;
 
-    @Column(name = "logo")
-    private String logo;
-
-    @Column(name = "image")
-    private String image;
 
     public Menu() {
     }
 
-    public Menu( @Size(min = 3, max = 256) String category, String logo, String image) {
-        this.category = category;
-        this.logo = logo;
-        this.image = image;
+    public String getName() {
+        return name;
     }
 
-
-
-    public String getCategory() {
-        return category;
+    public Boolean getActivated() {
+        return isActivated;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setActivated(Boolean activated) {
+        isActivated = activated;
     }
 
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    @Override
-    public String toString() {
-        return "Menu{" +
-            ", category='" + category + '\'' +
-            ", logo='" + logo + '\'' +
-            ", image='" + image + '\'' +
-            '}';
+    public void setName(String name) {
+        this.name = name;
     }
 }

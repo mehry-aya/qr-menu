@@ -2,55 +2,52 @@
     <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" role="form">
         <h2>Edit Menu File</h2>
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="category">Category</label>
-                    <input class="form-control" formControlName="category" id="category" name="category"
-                           placeholder="category"
-                           type="text">
+                    <label for="name">Name</label>
+                    <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
                     <div
-                        *ngIf="editForm.get('category')!.invalid && (editForm.get('category')!.dirty || editForm.get('category')!.touched)">
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
 
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="logo">logo</label>
-                    <input class="form-control" formControlName="logo" id="logo" name="logo" placeholder="Logo"
-                           type="text">
-                    <div
-                        *ngIf="editForm.get('logo')!.invalid && (editForm.get('logo')!.dirty || editForm.get('logo')!.touched)">
-                    </div>
+                    <label for="file">File</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input (change)="onUploadFile($event.target)"
+                                   class="custom-file-input"
+                                   formControlName="uploadedFile"
+                                   id="file"
+                                   type="file"
+                                   accept="image/*,application/PDF">
 
+                            <label class="custom-file-label" for="file">{{menu?.uploadedFile?.name}}
+                            </label>
+                            <div
+                                *ngIf="editForm.get('uploadedFile')!.invalid && (editForm.get('uploadedFile')!.dirty || editForm.get('uploadedFile')!.touched)">
+                            </div>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="input-group-text" (click)="deleteFile(menu.uploadedFile.id)" [disabled]="!menu.uploadedFile">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input class="form-control" formControlName="image" id="image" name="image" placeholder="image"
-                           type="text">
-
-                    <div
-                        *ngIf="editForm.get('image')!.invalid && (editForm.get('image')!.dirty || editForm.get('image')!.touched)">
-                    </div>
-
-                </div>
+            <div class="col-md-1">
+                <button (click)="previousState()" class="btn btn-outline-warning float-lg-left" type="submit"> Return</button>
             </div>
-
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
-                <button [disabled]="editForm.invalid || isSaving" class="btn btn-outline-success" type="submit">Save
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-3">
+                <button [disabled]="editForm.invalid || isSaving " class="btn btn-outline-success float-lg-right" type="submit">Save
                     Changes
                 </button>
-                <button (click)="previousState()"> Return</button>
-
             </div>
         </div>
     </form>
 </div>
-
-

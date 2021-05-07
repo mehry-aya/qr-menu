@@ -13,8 +13,6 @@ public class MenuFilesMapper {
     public MenuFiles menuFilesDTOMenuFiles(MenuFilesDTO menuFilesDTO){
 
         MenuFiles menuFiles = new MenuFiles();
-        menuFiles.setCategory(menuFilesDTO.getCategory());
-        menuFiles.setImage(menuFilesDTO.getImage());
         return menuFiles;
     }
     public List<MenuFiles> menuFilesDTOsToMenuFiles(List<MenuFilesDTO> menuFilesDTO){
@@ -25,9 +23,10 @@ public class MenuFilesMapper {
 
         MenuFilesDTO menuFilesDTO = new MenuFilesDTO();
         menuFilesDTO.setId(menuFiles.getId());
-        menuFilesDTO.setCategory(menuFiles.getCategory());
-        menuFilesDTO.setImage(menuFilesDTO.getImage());
-         return menuFilesDTO;
+        menuFilesDTO.setName(menuFiles.getName());
+
+
+        return menuFilesDTO;
 
     }
     public List<MenuFilesDTO> menuFilesToMenuFilesDTOs(List<MenuFiles> menuFiles){

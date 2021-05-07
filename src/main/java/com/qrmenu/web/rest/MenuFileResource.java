@@ -1,39 +1,82 @@
 package com.qrmenu.web.rest;
 
 import com.qrmenu.domain.MenuFiles;
+import com.qrmenu.domain.UploadedFile;
 import com.qrmenu.repository.MenuFilesRepository;
 import com.qrmenu.service.MenuFilesService;
-import com.qrmenu.service.dto.MenuFilesDTO;
-import com.qrmenu.service.mapper.MenuFilesMapper;
+import com.qrmenu.service.UploadService;
+import liquibase.util.file.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+
+import static java.nio.file.Files.copy;
+import static java.nio.file.Paths.get;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 
 @RestController
 @RequestMapping("/api/menu-files")
 public class MenuFileResource {
 
+    public static final String CONTENT_UPLOADS = "content/uploads";
     private final Logger log = LoggerFactory.getLogger(MenuFileResource.class);
 
-    private final MenuFilesService menuFilesService;
-    private final MenuFilesMapper menuFilesMapper;
-    private final MenuFilesRepository menuFilesRepository;
 
-    public MenuFileResource(MenuFilesService menuFilesService, MenuFilesMapper menuFilesMapper, MenuFilesRepository menuFilesRepository) {
+    private final MenuFilesService menuFilesService;
+    private final MenuFilesRepository menuFilesRepository;
+    private final UploadService uploadService;
+
+    @Autowired
+    ServletContext context;
+
+    public MenuFileResource(MenuFilesService menuFilesService, MenuFilesRepository menuFilesRepository,
+                            UploadService uploadService) {
         this.menuFilesService = menuFilesService;
-        this.menuFilesMapper = menuFilesMapper;
         this.menuFilesRepository = menuFilesRepository;
+        this.uploadService = uploadService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<MenuFiles> createMenu(@Valid @RequestBody MenuFilesDTO menuFilesDTO) {
-        MenuFiles menuFiles = this.menuFilesMapper.menuFilesDTOMenuFiles(menuFilesDTO);
+    public ResponseEntity<MenuFiles> createMenu(@Valid @RequestBody MenuFiles menuFiles) {
+        UploadedFile uploadedFile = this.uploadService.getById(menuFiles.getUploadedFile().getId());
+        menuFiles.setUploadedFile(uploadedFile);
         return ResponseEntity.ok(this.menuFilesService.addMenuFile(menuFiles));
+
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<UploadedFile> uploadFiles(@RequestParam("files") MultipartFile multipartFile) throws IOException {
+        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        String DIRECTORY = context.getRealPath(CONTENT_UPLOADS);
+        File directory = new File(DIRECTORY);
+        if (!directory.exists()) {
+            directory.mkdir();
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+
+        Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+        copy(multipartFile.getInputStream(), fileStorage, REPLACE_EXISTING);
+        UploadedFile uploadedFile = new UploadedFile();
+        uploadedFile.setName(filename);
+        uploadedFile.setPath(CONTENT_UPLOADS + "/" + filename);
+        uploadedFile.setType(FilenameUtils.getExtension(filename).toUpperCase());
+        UploadedFile output = this.uploadService.save(uploadedFile);
+        return ResponseEntity.ok().body(output);
 
     }
 
@@ -58,5 +101,13 @@ public class MenuFileResource {
         this.menuFilesRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping("/delete/file/{id}")
+    public ResponseEntity<HttpStatus> deleteFile(@PathVariable("id") long id) {
+        this.uploadService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 }
 

@@ -1,18 +1,23 @@
 package com.qrmenu.service.dto;
 
-import javax.validation.constraints.Size;
-
 public class MenuFilesDTO {
-
 
 
     private Long id;
 
-    @Size(min = 1, max = 60)
-    private String category;
+    private String name;
 
-    @Size(max = 256)
-    private String image;
+    private byte[] file;
+
+    private byte[] logo;
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
 
     public Long getId() {
         return id;
@@ -22,21 +27,19 @@ public class MenuFilesDTO {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public byte[] getFile() {
+        return file;
     }
 
-    public void setImage(String imageUrl) {
-        this.image = image;
+    public void setFile(byte[] file) {
+        this.file = file;
     }
-
-
 }

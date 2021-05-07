@@ -1,51 +1,61 @@
 <div class="container">
-    <form [formGroup] = "menuForm">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="category">Category</label>
-                <input formControlName="category" type="text" class="form-control" id="category"  placeholder="category">
+    <form [formGroup]="menuForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="file">File</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input (change)="onUploadFile($event.target)"
+                                   name="files"
+                                   class="form-control"
+                                   formControlName="uploadedFile"
+                                   id="file"
+                                   type="file"
+
+                                   accept="image/*,application/PDF">
+
+                            <label class="custom-file-label"
+                                   for="file">{{uploadedFile?.name}}
+                            </label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="input-group-text" (click)="deleteFile(uploadedFile.id)" [disabled]="!uploadedFile">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <button (click)="add()" [disabled]="menuForm.invalid" class="btn btn-outline-success" type="submit">
+                    Ajouter
+                </button>
             </div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="logo">logo</label>
-                <input formControlName="logo" type="text" class="form-control" id="logo" placeholder="Logo">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input formControlName="image" type="text" class="form-control" id="image"  placeholder="image">
-            </div>
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-5">
-            <button type="button" (click)="add()" class="btn btn-outline-success" [disabled]="menuForm.invalid">Ajouter</button>
-        </div>
-    </div>
     </form>
 </div>
-
+<br>
+<br>
 <div class="container">
     <div class="row">
         <div *ngFor="let menu of menuList" class="col-md-3">
-            <div class="card" >
-                <img
-                    class="card-img-top"
-                    src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-businessman-avatar-cartoon-style-png-image_5234654.jpg">
+            <div class="card">
+                <img *ngIf="menu.uploadedFile.type === 'PDF'" src="/content/images/logo.png"  class="card-img-top">
+                <img *ngIf="menu.uploadedFile.type !== 'PDF'" [src]="getImageUrl(menu.uploadedFile)" class="card-img-top">
+
                 <div class="card-body">
-                    <h5 class="card-title">{{menu.category}}</h5>
-                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(menu.id)">
-                    <span class="d-none d-md-inline">Delete</span>
+                    <h5 class="card-title">{{menu.name}}</h5>
+                    <button (click)="delete(menu.id)" class="btn btn-danger btn-sm" type="button">
+                        <span class="d-none d-md-inline">Delete</span>
                     </button>
-                    <button type="submit"
-                            [routerLink]="[menu.id, 'edit']"
+                    <button [routerLink]="[menu.id, 'edit']"
+                            class="btn btn-primary btn-sm"
                             queryParamsHandling="merge"
-                            class="btn btn-primary btn-sm">
+                            type="submit">
                         <span class="d-none d-md-inline">Edit</span>
                     </button>
                 </div>

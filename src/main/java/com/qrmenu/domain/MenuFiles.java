@@ -1,7 +1,7 @@
 package com.qrmenu.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 
@@ -12,8 +12,23 @@ public class MenuFiles extends Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "uploadedFile_id" , referencedColumnName = "id")
+    private UploadedFile uploadedFile;
 
     public MenuFiles() {
+    }
+
+    public MenuFiles(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 
     public Long getId() {
@@ -23,5 +38,7 @@ public class MenuFiles extends Menu implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 
 }

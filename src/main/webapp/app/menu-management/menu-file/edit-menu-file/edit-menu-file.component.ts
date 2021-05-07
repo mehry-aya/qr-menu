@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IMenuFiles, MenuFiles } from 'app/menu-management/menu-file/menu-files.model';
+import { MenuFiles } from 'app/menu-management/menu-file/menu-files.model';
 import { MenuFileService } from 'app/menu-management/menu-file/menu-file.service';
 import { FormBuilder } from '@angular/forms';
+import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
 
 @Component({
   selector: 'jhi-edit-menu-file',
@@ -10,21 +11,14 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./edit-menu-file.component.scss'],
 })
 export class EditMenuFileComponent implements OnInit {
-  public id!: number;
+  id!: number;
   menu!: MenuFiles;
   isSaving = false;
 
   editForm = this.fb.group({
-    category: [''],
-    logo: [''],
-    image: [''],
+    name: [''],
+    uploadedFile: [''],
   });
-
-  // editForm = new FormGroup({
-  //   category: new FormControl(''),
-  //   image: new FormControl(''),
-  //   logo: new FormControl(''),
-  // })
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private menuFileService: MenuFileService) {}
 
@@ -32,11 +26,31 @@ export class EditMenuFileComponent implements OnInit {
     this.activatedRoute.params.subscribe(data => {
       this.id = data['id'];
 
-      this.menuFileService.getMenuFile(this.id).subscribe((menu: IMenuFiles) => {
+      this.menuFileService.getMenuFile(this.id).subscribe((menu: MenuFiles) => {
         this.menu = menu;
         this.updateForm(menu);
       });
     });
+  }
+
+  private updateForm(menu: MenuFiles): void {
+    this.editForm.patchValue({
+      name: menu.name,
+    });
+  }
+
+  public onUploadFile($event: any): void {
+    const formData = new FormData();
+    const file: File = $event.files[0];
+    formData.append('files', file, file.name);
+    this.menuFileService.upload(formData).subscribe(uploadedFile => {
+      this.menu.uploadedFile = uploadedFile;
+    });
+  }
+
+  private editMenu(menu: MenuFiles): void {
+    menu.name = this.editForm.get(['name'])!.value;
+    menu.uploadedFile = this.menu.uploadedFile;
   }
 
   previousState(): void {
@@ -54,20 +68,12 @@ export class EditMenuFileComponent implements OnInit {
     }
   }
 
-  private updateForm(menu: MenuFiles): void {
-    this.editForm.patchValue({
-      category: menu.category,
-      logo: menu.logo,
-      image: menu.image,
+  deleteFile(id: number): void {
+    this.menuFileService.deleteFile(id).subscribe(() => {
+      this.menu.uploadedFile = new UploadedFile();
+      this.editForm.get('uploadedFile')?.reset();
     });
   }
-
-  private editMenu(menu: MenuFiles): void {
-    menu.category = this.editForm.get(['category'])!.value;
-    menu.logo = this.editForm.get(['logo'])!.value;
-    menu.image = this.editForm.get(['image'])!.value;
-  }
-
   private onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();

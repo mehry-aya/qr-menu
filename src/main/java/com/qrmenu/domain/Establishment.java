@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "establishment")
@@ -37,25 +38,51 @@ public class Establishment  implements Serializable {
     @Column(name = "logo", length = 256)
     private String logo;
 
+    @OneToOne
+    @JoinColumn(name = "menuFile_id", referencedColumnName = "id")
+    private MenuFiles menuFiles;
+
+    @OneToOne
+    @JoinColumn(name = "digitalMenu_id" , referencedColumnName = "id")
+    private DigitalMenu digitalMenu ;
+
     @ManyToOne
     @JsonBackReference
     private User user;
 
-    public Establishment(){
-
-    }
-
-    public Establishment(Long id, @NotNull @Size(min = 3, max = 256) String name, @Size(min = 3, max = 256) String adress, @Size(min = 3, max = 256) String contact, @Size(min = 1, max = 256) String category, @Size(max = 256) String logo) {
-        this.id = id;
+    public Establishment(@Size(min = 3, max = 256) String name, @Size(min = 3, max = 256) String adress, @Size(min = 3, max = 256) String contact, @Size(min = 1, max = 256) String category, @Size(max = 256) String logo, MenuFiles menuFiles, DigitalMenu digitalMenu, User user) {
         this.name = name;
         this.adress = adress;
         this.contact = contact;
         this.category = category;
         this.logo = logo;
+        this.menuFiles = menuFiles;
+        this.digitalMenu = digitalMenu;
+        this.user = user;
+    }
+
+    public Establishment(){
+
     }
 
     public User getUser() {
         return user;
+    }
+
+    public MenuFiles getMenuFiles() {
+        return menuFiles;
+    }
+
+    public void setMenuFiles(MenuFiles menuFiles) {
+        this.menuFiles = menuFiles;
+    }
+
+    public DigitalMenu getDigitalMenu() {
+        return digitalMenu;
+    }
+
+    public void setDigitalMenu(DigitalMenu digitalMenu) {
+        this.digitalMenu = digitalMenu;
     }
 
     public void setUser(User user) {

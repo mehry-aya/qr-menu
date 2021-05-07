@@ -1,10 +1,7 @@
-export interface IMenuFiles {
-  id?: number;
-  category: string;
-  image: string;
-  logo: string;
-}
+import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
 
-export class MenuFiles implements IMenuFiles {
-  constructor(public category: string, public image: string, public logo: string, public id?: number) {}
+export class MenuFiles {
+  id?: number;
+  name!: string;
+  uploadedFile!: UploadedFile;
 }
