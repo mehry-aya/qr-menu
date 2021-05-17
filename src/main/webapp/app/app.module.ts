@@ -15,6 +15,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { MenuManagementModule } from 'app/menu-management/menu-management.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EstablishmentModule } from 'app/establishment/establishment.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     QrMenuEntityModule,
     QrMenuAppRoutingModule,
     MenuManagementModule,
+    EstablishmentModule,
     ReactiveFormsModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

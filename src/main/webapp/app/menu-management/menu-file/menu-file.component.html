@@ -19,7 +19,6 @@
                                    formControlName="uploadedFile"
                                    id="file"
                                    type="file"
-
                                    accept="image/*,application/PDF">
 
                             <label class="custom-file-label"
@@ -41,8 +40,8 @@
 <br>
 <br>
 <div class="container">
-    <div class="row">
-        <div *ngFor="let menu of menuList" class="col-md-3">
+    <div class="row" *ngIf="menu">
+        <div class="col-md-3">
             <div class="card">
                 <img *ngIf="menu.uploadedFile.type === 'PDF'" src="/content/images/logo.png"  class="card-img-top">
                 <img *ngIf="menu.uploadedFile.type !== 'PDF'" [src]="getImageUrl(menu.uploadedFile)" class="card-img-top">

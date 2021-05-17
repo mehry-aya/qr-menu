@@ -13,8 +13,8 @@ export class MenuFileService {
 
   constructor(private http: HttpClient) {}
 
-  public addMenuFile(menuFile: MenuFiles): Observable<MenuFiles> {
-    return this.http.post<MenuFiles>(this.apiServerUrl + '/add', menuFile);
+  public addMenuFile(menuFile: MenuFiles, id: number): Observable<MenuFiles> {
+    return this.http.post<MenuFiles>(`${this.apiServerUrl}/add/${id}`, menuFile);
   }
 
   public upload(formData: FormData): Observable<UploadedFile> {
@@ -39,5 +39,9 @@ export class MenuFileService {
 
   public getAllMenu(): Observable<MenuFiles[]> {
     return this.http.get<MenuFiles[]>(this.apiServerUrl + '/all');
+  }
+
+  public getAllMenuFileByEstablishment(id: number): Observable<MenuFiles> {
+    return this.http.get<MenuFiles>(`${this.apiServerUrl}/establishment/${id}`);
   }
 }

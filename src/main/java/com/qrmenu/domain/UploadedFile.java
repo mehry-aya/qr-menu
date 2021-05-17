@@ -1,12 +1,13 @@
 package com.qrmenu.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Table(name = "uploadedFile")
 @Entity
 public class UploadedFile implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

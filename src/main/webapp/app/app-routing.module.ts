@@ -26,8 +26,12 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
           loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
         },
         {
-          path: 'menu-management',
+          path: 'menu-management/:idEstab',
           loadChildren: () => import('./menu-management/menu-management.module').then(m => m.MenuManagementModule),
+        },
+        {
+          path: 'establishment',
+          loadChildren: () => import('./establishment/establishment.module').then(m => m.EstablishmentModule),
         },
 
         ...LAYOUT_ROUTES,

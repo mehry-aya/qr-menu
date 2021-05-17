@@ -8,6 +8,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "menu_files")
 public class MenuFiles extends Menu implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

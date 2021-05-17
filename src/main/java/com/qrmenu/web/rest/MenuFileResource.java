@@ -1,10 +1,13 @@
 package com.qrmenu.web.rest;
 
+import com.qrmenu.domain.Establishment;
 import com.qrmenu.domain.MenuFiles;
 import com.qrmenu.domain.UploadedFile;
 import com.qrmenu.repository.MenuFilesRepository;
+import com.qrmenu.service.EstablishmentService;
 import com.qrmenu.service.MenuFilesService;
 import com.qrmenu.service.UploadService;
+import com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLService;
 import liquibase.util.file.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,22 +41,26 @@ public class MenuFileResource {
     private final MenuFilesService menuFilesService;
     private final MenuFilesRepository menuFilesRepository;
     private final UploadService uploadService;
+    private final EstablishmentService establishmentService;
+
 
     @Autowired
     ServletContext context;
 
-    public MenuFileResource(MenuFilesService menuFilesService, MenuFilesRepository menuFilesRepository,
+    public MenuFileResource(MenuFilesService menuFilesService, EstablishmentService establishmentService, MenuFilesRepository menuFilesRepository,
                             UploadService uploadService) {
         this.menuFilesService = menuFilesService;
         this.menuFilesRepository = menuFilesRepository;
         this.uploadService = uploadService;
+        this.establishmentService = establishmentService;
+
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<MenuFiles> createMenu(@Valid @RequestBody MenuFiles menuFiles) {
+    @PostMapping("/add/{id}")
+    public ResponseEntity<MenuFiles> createMenu(@Valid @RequestBody MenuFiles menuFiles, @PathVariable("id") Long id_estab) {
         UploadedFile uploadedFile = this.uploadService.getById(menuFiles.getUploadedFile().getId());
         menuFiles.setUploadedFile(uploadedFile);
-        return ResponseEntity.ok(this.menuFilesService.addMenuFile(menuFiles));
+        return ResponseEntity.ok(this.menuFilesService.addMenuFile(menuFiles,id_estab));
 
     }
 
@@ -94,6 +101,11 @@ public class MenuFileResource {
     @GetMapping("/all")
     public ResponseEntity<List<MenuFiles>> getAllMenuFiles() {
         return ResponseEntity.ok(this.menuFilesService.findAllMenuFiles());
+    }
+
+    @GetMapping("/establishment/{id}")
+    public ResponseEntity<MenuFiles> getMenuFileByEstablishment(@PathVariable("id") Long idEstab){
+        return ResponseEntity.ok(this.menuFilesService.findMenuFileByEstablishment(idEstab));
     }
 
     @DeleteMapping("/delete/{id}")

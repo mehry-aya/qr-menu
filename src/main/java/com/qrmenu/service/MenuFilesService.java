@@ -34,11 +34,9 @@ public class MenuFilesService {
 
     }
 
-    public MenuFiles addMenuFile(MenuFiles menuFiles) {
+    public MenuFiles addMenuFile(MenuFiles menuFiles, Long id_estab) {
         MenuFiles newMenuFile = this.menuFilesRepository.save(menuFiles);
-        User currentUser = this.userService.getUserWithAuthorities().get();
-        List<Establishment> establishments = currentUser.getEstablishments();
-        Establishment establishment = establishments.get(0);
+        Establishment establishment = this.establishmentRepository.findById(id_estab).get();
         establishment.setMenuFiles(newMenuFile);
         this.establishmentRepository.save(establishment);
         return newMenuFile;
@@ -58,6 +56,11 @@ public class MenuFilesService {
 
     public List<MenuFiles> findAllMenuFiles() {
         return this.menuFilesRepository.findAll();
+    }
+
+    public MenuFiles findMenuFileByEstablishment( Long idEstab) {
+        Establishment establishment = this.establishmentRepository.findById(idEstab).get();
+        return establishment.getMenuFiles();
     }
 
     public void deleteMenuFile(MenuFiles menuFiles) {

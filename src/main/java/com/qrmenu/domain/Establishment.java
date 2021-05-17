@@ -34,9 +34,9 @@ public class Establishment  implements Serializable {
     @Column(name = "category", length = 256)
     private String category;
 
-    @Size(max= 256)
-    @Column(name = "logo", length = 256)
-    private String logo;
+    @OneToOne
+    @JoinColumn(name = "uploadedFile_id" , referencedColumnName = "id")
+    private UploadedFile logo;
 
     @OneToOne
     @JoinColumn(name = "menuFile_id", referencedColumnName = "id")
@@ -50,7 +50,7 @@ public class Establishment  implements Serializable {
     @JsonBackReference
     private User user;
 
-    public Establishment(@Size(min = 3, max = 256) String name, @Size(min = 3, max = 256) String adress, @Size(min = 3, max = 256) String contact, @Size(min = 1, max = 256) String category, @Size(max = 256) String logo, MenuFiles menuFiles, DigitalMenu digitalMenu, User user) {
+    public Establishment(@Size(min = 3, max = 256) String name, @Size(min = 3, max = 256) String adress, @Size(min = 3, max = 256) String contact, @Size(min = 1, max = 256) String category, UploadedFile logo, MenuFiles menuFiles, DigitalMenu digitalMenu, User user) {
         this.name = name;
         this.adress = adress;
         this.contact = contact;
@@ -129,11 +129,11 @@ public class Establishment  implements Serializable {
         this.category = category;
     }
 
-    public String getLogo() {
+    public UploadedFile getLogo() {
         return logo;
     }
 
-    public void setLogo(String logo) {
+    public void setLogo(UploadedFile logo) {
         this.logo = logo;
     }
 

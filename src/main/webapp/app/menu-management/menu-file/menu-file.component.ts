@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuFileService } from 'app/menu-management/menu-file/menu-file.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuFiles } from 'app/menu-management/menu-file/menu-files.model';
 import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
-import { ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-menu-file',
@@ -11,19 +11,24 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./menu-file.component.scss'],
 })
 export class MenuFileComponent implements OnInit {
-  public menuList: MenuFiles[] = [];
+  public menu!: MenuFiles;
   public menuForm: FormGroup;
   public uploadedFile!: UploadedFile;
-  @ViewChild('myFile')
-  myInputVariable!: ElementRef;
+  public id!: number;
+  // @ViewChild('myFile')
+  // myInputVariable!: ElementRef;
 
-  constructor(private menuFileService: MenuFileService, private fb: FormBuilder) {
+  constructor(private menuFileService: MenuFileService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.menuForm = this.createForm();
   }
 
   ngOnInit(): void {
-    this.menuFileService.getAllMenu().subscribe(value => {
-      this.menuList = value;
+    this.activatedRoute.params.subscribe(data => {
+      this.id = data['idEstab'];
+
+      this.menuFileService.getAllMenuFileByEstablishment(this.id).subscribe(value => {
+        this.menu = value;
+      });
     });
   }
 
@@ -31,11 +36,11 @@ export class MenuFileComponent implements OnInit {
     const menu: MenuFiles = new MenuFiles();
     menu.name = this.menuForm.get('name')?.value;
     menu.uploadedFile = this.uploadedFile;
-    this.menuFileService.addMenuFile(menu).subscribe(() => {
+    this.menuFileService.addMenuFile(menu, this.id).subscribe(() => {
       this.menuForm.reset();
       this.uploadedFile = new UploadedFile();
-      this.menuFileService.getAllMenu().subscribe(value => {
-        this.menuList = value;
+      this.menuFileService.getAllMenuFileByEstablishment(this.id).subscribe(value => {
+        this.menu = value;
       });
     });
   }
@@ -59,8 +64,8 @@ export class MenuFileComponent implements OnInit {
 
   public delete(id: any): void {
     this.menuFileService.deleteMenuFile(id).subscribe(() => {
-      this.menuFileService.getAllMenu().subscribe(value => {
-        this.menuList = value;
+      this.menuFileService.getAllMenuFileByEstablishment(this.id).subscribe(value => {
+        this.menu = value;
       });
     });
   }
