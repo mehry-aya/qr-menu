@@ -1,0 +1,86 @@
+<hr>
+<div class="col-md-12">
+    <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel id="toggle-1" title="New Establishment">
+            <ng-template ngbPanelContent>
+                <form [formGroup]="estabForm">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Logo</label>
+                            <input (change)="onUploadFile($event.target)"
+                                   formControlName="logo"
+                                   id="file"
+                                   name="files"
+                                   type="file">
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input class="form-control" formControlName="name" id="name" placeholder="name"
+                                       type="text">
+
+                                <label>Category</label>
+                                <input class="form-control" formControlName="category" id="category" placeholder="category"
+                                       type="text">
+
+                                <label>Adress</label>
+                                <input class="form-control" formControlName="adress" id="adress" placeholder="adress"
+                                       type="text">
+
+                                <label>Contact</label>
+                                <input class="form-control" formControlName="contact" id="contact" placeholder="contact"
+                                       type="text">
+
+                                <div>
+                                    <button [disabled]="estabForm.invalid"  (click)="add()" type="submit" class="btn btn-outline-success float-lg-right">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>
+<hr>
+
+<div class="container row">
+    <div class="col-md-1"></div>
+    <div *ngFor="let establishment of estabList" class="col-md-5">
+        <div class="card">
+
+            <img *ngIf="establishment.logo"
+                 [src]="getImageUrl(establishment.logo)">
+
+            <div class="card-body">
+                <h6>{{establishment.category}} - {{establishment.name}}</h6>
+                <hr>
+                <p>{{establishment.contact}}</p>
+                <hr>
+                <p>{{establishment.adress}}</p>
+                <hr>
+            </div>
+            <div class="card-body">
+                <div class="btn-group-vertical">
+                    <button routerLink="/menu-management/{{establishment.id}}" type="button">Add Menu</button>
+                </div>
+
+                <div class="float-lg-right">
+                    <button [routerLink]="[establishment.id, 'edit']"
+                            class="btn btn-primary btn-sm"
+                            type="submit">edit</button>
+                    <button (click)="delete(establishment.id)" type="button">delete</button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+
+</div>
+

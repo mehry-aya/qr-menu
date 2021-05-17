@@ -1,0 +1,56 @@
+<div class="container" *ngIf="establishment">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" role="form">
+            <div class="row">
+
+                <div class="col-md-5">
+                    <label>Logo</label>
+                    <div class="row">
+                        <img *ngIf="establishment.logo" [src]="establishment.logo.path">
+                    </div>
+                    <div class="row">
+                    <input (change)="onUploadFile($event.target)"
+                           formControlName="logo"
+                           id="file"
+                           name="files"
+                           type="file"
+                           accept="image/*">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" formControlName="name" id="name" placeholder="name"
+                               type="text">
+
+                        <label>Category</label>
+                        <input class="form-control" formControlName="category" id="category" placeholder="category"
+                               type="text">
+
+                        <label>Adress</label>
+                        <input class="form-control" formControlName="adress" id="adress" placeholder="adress"
+                               type="text">
+
+                        <label>Contact</label>
+                        <input class="form-control" formControlName="contact" id="contact" placeholder="contact"
+                               type="text">
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button (click)="previousState()" class="btn btn-outline-warning float-lg-left" type="submit"> Return</button>
+                            </div>
+                            <div class="col-md-8">
+                            </div>
+                            <div class="col-md-3">
+                                <button [disabled]="editForm.invalid || isSaving " class="btn btn-outline-success float-lg-right" type="submit">Save
+                                    Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </form>
+    </div>
+
