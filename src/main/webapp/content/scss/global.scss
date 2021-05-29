@@ -44,8 +44,12 @@ Generic styles
   padding: 1.5%;
   margin-top: 20px;
   border: none;
-  background: #f5f5dcd1;
+  background: rgba(245, 245, 220, 0.82);
   margin-top: 60px;
+  height: auto;
+}
+.jh-card jhi-menu-management {
+  height: 20cm;
 }
 .form-control .input {
   margin-bottom: 10px;
@@ -222,9 +226,31 @@ label {
 .custom-file-label {
   border-color: grey;
 }
-.input-group-append {
+.input-group-append .input-group-text {
   border-color: grey !important;
 }
 .row {
   margin-top: 25px !important;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  width: 250px;
+}
+
+jhi-login-modal {
+  background: #f7f7e2 !important;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  margin-left: auto !important;
+  font-size: xx-large;
+}
+jhi-register .btn-primary {
+  float: right;
+  margin: 25px 55px 100px;
 }

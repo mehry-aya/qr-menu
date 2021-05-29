@@ -9,6 +9,9 @@
 <div class="modal-body">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div>
+                <a class="alert-link" (click)="register()">créer un compte</a>
+            </div>
             <div class="alert alert-danger" *ngIf="authenticationError">
                 <strong>Failed to sign in!</strong> Please check your credentials and try again.
             </div>
@@ -33,19 +36,10 @@
                         <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe">
                         <span>Remember me</span>
                     </label>
+                    <a class="alert-link" (click)="requestResetPassword()">mot de passe oublié?</a>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Sign in</button>
             </form>
-
-            <div class="mt-3 alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()">Did you forget your password?</a>
-            </div>
-
-            <div class="alert alert-warning">
-                <span>You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()">Register a new account</a>
-            </div>
         </div>
     </div>
+    <button (click)="login()" type="submit" class="btn btn-primary">Sign in</button>
 </div>

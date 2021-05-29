@@ -1,21 +1,29 @@
 <!--<h1>HELLO PEOPLE!</h1>-->
-
+<div class="row">
+<div class="col-md-4 ">
 <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
     <ng-template ngbSlide *ngFor="let image of images">
         <div class="picsum-img-wrapper">
             <img [src]="image" alt="Random slide">
         </div>
-        <div class="carousel-caption">
-            <h3>No mouse navigation</h3>
-            <p>This carousel hides navigation arrows and indicators.</p>
-        </div>
+                    <div class="carousel-caption">
+
+                    </div>
     </ng-template>
 </ngb-carousel>
+<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random slide">
+        </div>
+                    <div class="carousel-caption">
 
-<!--<div>-->
-<!--    <button class="btn-warning"-->
-<!--            routerLink="/establishment"-->
-<!--            routerLinkActive="active">-->
-<!--                add Establishment-->
-<!--    </button>-->
-<!--</div>-->
+                    </div>
+    </ng-template>
+</ngb-carousel>
+</div>
+
+<div class="col-md-8">
+    <h2>Join Our Partners And Keep your life Safe & Easy</h2>
+</div>
+</div>
