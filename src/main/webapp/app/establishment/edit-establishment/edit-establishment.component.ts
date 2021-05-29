@@ -14,6 +14,7 @@ export class EditEstablishmentComponent implements OnInit {
   id!: number;
   isSaving = false;
   establishment!: Establishment;
+  logo!: UploadedFile;
 
   editForm = this.fb.group({
     name: [''],

@@ -1,11 +1,14 @@
 .card {
-  margin: 0px 0px 20px 0px;
+  margin: 50px 0px 20px 0px;
+  border-color: #bc8f8f47 !important;
 }
+
 img {
   width: 200px;
   height: 250px;
-  padding: 1px;
+  padding: 20px 0px 20px 0px;
   margin-inline: auto;
+  border-color: white;
 }
 .container {
   margin: 20px 80px 20px 100px;
@@ -19,4 +22,69 @@ img {
 }
 .form-control {
   margin-bottom: 10px;
+  border-color: grey;
+}
+h6 {
+  text-align: center;
+  font-size: xx-large;
+  text-shadow: 2px 3px 5px #00000054;
+  color: gray;
+}
+.card-header {
+  margin-bottom: 0px;
+}
+.btn-link {
+  color: rosybrown;
+  font-weight: bold;
+}
+p {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: x-large;
+}
+label {
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-left: 0px;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  border-color: grey;
+}
+.form-group {
+  margin-bottom: 1rem;
+  margin-left: 10px;
+}
+.custom-file-label {
+  border-color: grey;
+}
+.input-group-append {
+  border-color: grey !important;
+}
+.input {
+  border-color: grey;
+}
+
+.btn-light {
+  border-color: #80808033 !important;
+}
+.btn-lg {
+  min-width: 100%;
+  background: white;
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: x-large;
+  border-color: #bc8f8fa8;
+  text-shadow: 0 0 black;
+  margin-top: -15px;
+  box-shadow: 0px 5px 5px;
+}
+.btn-lg:hover {
+  background: #eccece;
 }

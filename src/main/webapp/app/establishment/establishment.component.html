@@ -1,40 +1,56 @@
-<hr>
+<div class="container-fluid">
 <div class="col-md-12">
     <ngb-accordion #acc="ngbAccordion">
         <ngb-panel id="toggle-1" title="New Establishment">
             <ng-template ngbPanelContent>
                 <form [formGroup]="estabForm">
                     <div class="row">
-
-                        <div class="col-md-4">
+                        <div class="form-group">
                             <label>Logo</label>
-                            <input (change)="onUploadFile($event.target)"
-                                   formControlName="logo"
-                                   id="file"
-                                   name="files"
-                                   type="file">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input (change)="onUploadFile($event.target)"
+                                           formControlName="logo"
+                                           id="file"
+                                           name="files"
+                                           type="file"
+                                           accept="image/*">
+
+                                    <label class="custom-file-label"
+                                           for="file">{{logo?.name}}
+
+                                    </label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="input-group-text" (click)="deleteFile(logo.id)" [disabled]="!logo">Delete</button>
+                                </div>
                         </div>
+                        </div>
+                        <div class="col-1"></div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label for="name">Name</label>
                                 <input class="form-control" formControlName="name" id="name" placeholder="name"
                                        type="text">
 
-                                <label>Category</label>
-                                <input class="form-control" formControlName="category" id="category" placeholder="category"
+                                <label for="category">Category</label>
+                                <input class="form-control" formControlName="category" id="category"
+                                       placeholder="category"
                                        type="text">
 
-                                <label>Adress</label>
+                                <label for="adress">Adress</label>
                                 <input class="form-control" formControlName="adress" id="adress" placeholder="adress"
                                        type="text">
 
-                                <label>Contact</label>
+                                <label for="contact">Contact</label>
                                 <input class="form-control" formControlName="contact" id="contact" placeholder="contact"
                                        type="text">
 
                                 <div>
-                                    <button [disabled]="estabForm.invalid"  (click)="add()" type="submit" class="btn btn-outline-success float-lg-right">Ajouter</button>
+                                    <button (click)="add()" [disabled]="estabForm.invalid" class="btn btn-outline-success float-lg-right"
+                                            type="submit">Ajouter
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -45,10 +61,9 @@
         </ngb-panel>
     </ngb-accordion>
 </div>
-<hr>
+
 
 <div class="container row">
-    <div class="col-md-1"></div>
     <div *ngFor="let establishment of estabList" class="col-md-5">
         <div class="card">
 
@@ -56,7 +71,7 @@
                  [src]="getImageUrl(establishment.logo)">
 
             <div class="card-body">
-                <h6>{{establishment.category}} - {{establishment.name}}</h6>
+                <h6>{{establishment.category}} <br> {{establishment.name}}</h6>
                 <hr>
                 <p>{{establishment.contact}}</p>
                 <hr>
@@ -64,15 +79,16 @@
                 <hr>
             </div>
             <div class="card-body">
-                <div class="btn-group-vertical">
-                    <button routerLink="/menu-management/{{establishment.id}}" type="button">Add Menu</button>
+                <div >
+                    <button class="btn btn-lg btn-primary" routerLink="/menu-management/{{establishment.id}}" type="button">Menu</button>
                 </div>
-
+<br>
                 <div class="float-lg-right">
                     <button [routerLink]="[establishment.id, 'edit']"
-                            class="btn btn-primary btn-sm"
-                            type="submit">edit</button>
-                    <button (click)="delete(establishment.id)" type="button">delete</button>
+                            class="btn btn-outline-info"
+                            type="submit">edit
+                    </button>
+                    <button class="btn btn-light" (click)="delete(establishment.id)" type="button">delete</button>
                 </div>
 
 
@@ -80,7 +96,6 @@
 
         </div>
     </div>
-    <div class="col-md-2"></div>
-
+</div>
 </div>
 

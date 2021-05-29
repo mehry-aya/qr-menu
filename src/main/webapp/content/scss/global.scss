@@ -1,6 +1,6 @@
 @import 'bootstrap-variables';
 @import '~bootstrap/scss/functions';
-@import '~bootswatch/dist/simplex/variables';
+@import '~bootswatch/dist/Sketchy/variables';
 @import '~bootstrap/scss/variables';
 
 /* ==============================================================
@@ -44,6 +44,17 @@ Generic styles
   padding: 1.5%;
   margin-top: 20px;
   border: none;
+  background: #f5f5dcd1;
+  margin-top: 60px;
+}
+.form-control .input {
+  margin-bottom: 10px;
+  border-color: grey;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
 }
 
 .error {
@@ -164,3 +175,56 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.accordion > .card > .card-header {
+  margin-bottom: 0px !important;
+  background: #f7f7e2;
+}
+
+.accordion > .card:first-of-type {
+  border-color: #f7f7e2;
+}
+
+.btn-link.collapsed {
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-color: rgba(188, 143, 143, 0.28);
+}
+.btn-link {
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-color: #bc8f8f47;
+}
+.form-control {
+  margin-bottom: 10px;
+  border-color: grey;
+}
+label {
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-left: 0px;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  border-color: grey;
+}
+.form-group {
+  margin-bottom: 1rem;
+  margin-left: 10px;
+}
+.custom-file-label {
+  border-color: grey;
+}
+.input-group-append {
+  border-color: grey !important;
+}
+.row {
+  margin-top: 25px !important;
+}

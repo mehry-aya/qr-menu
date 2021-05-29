@@ -33,12 +33,6 @@ export class EditMenuFileComponent implements OnInit {
     });
   }
 
-  private updateForm(menu: MenuFiles): void {
-    this.editForm.patchValue({
-      name: menu.name,
-    });
-  }
-
   public onUploadFile($event: any): void {
     const formData = new FormData();
     const file: File = $event.files[0];
@@ -46,11 +40,6 @@ export class EditMenuFileComponent implements OnInit {
     this.menuFileService.upload(formData).subscribe(uploadedFile => {
       this.menu.uploadedFile = uploadedFile;
     });
-  }
-
-  private editMenu(menu: MenuFiles): void {
-    menu.name = this.editForm.get(['name'])!.value;
-    menu.uploadedFile = this.menu.uploadedFile;
   }
 
   previousState(): void {
@@ -74,6 +63,18 @@ export class EditMenuFileComponent implements OnInit {
       this.editForm.get('uploadedFile')?.reset();
     });
   }
+
+  private updateForm(menu: MenuFiles): void {
+    this.editForm.patchValue({
+      name: menu.name,
+    });
+  }
+
+  private editMenu(menu: MenuFiles): void {
+    menu.name = this.editForm.get(['name'])!.value;
+    menu.uploadedFile = this.menu.uploadedFile;
+  }
+
   private onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();

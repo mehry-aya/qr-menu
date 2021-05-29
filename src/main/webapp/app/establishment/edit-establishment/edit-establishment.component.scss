@@ -9,6 +9,37 @@
   margin-bottom: 10px;
 }
 img {
-  width: 200px;
-  height: 250px;
+  width: 195px;
+  height: 211px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+label {
+  color: rosybrown;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-left: 0px;
+}
+.container {
+  margin: 60px;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 10px;
+  border-color: grey;
+}
+.form-control {
+  margin-bottom: 10px;
+  border-color: grey;
+}
+.custom-file-label {
+  border-color: grey;
+}
+.input-group-append {
+  border-color: grey;
 }

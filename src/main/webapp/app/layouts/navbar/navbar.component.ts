@@ -60,4 +60,8 @@ export class NavbarComponent implements OnInit {
   getImageUrl(): string {
     return this.isAuthenticated() ? this.accountService.getImageUrl() : '';
   }
+
+  previousState(): void {
+    window.history.back();
+  }
 }

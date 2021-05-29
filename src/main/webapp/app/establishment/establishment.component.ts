@@ -13,6 +13,7 @@ export class EstablishmentComponent implements OnInit {
   public estabList: Establishment[] = [];
   public estabForm: FormGroup;
   public logo!: UploadedFile;
+  public establishment!: Establishment;
 
   constructor(private fb: FormBuilder, private establishmentService: EstablishmentService) {
     this.estabForm = this.createForm();
@@ -64,6 +65,13 @@ export class EstablishmentComponent implements OnInit {
       this.establishmentService.getAllEstablishments().subscribe(value => {
         this.estabList = value;
       });
+    });
+  }
+
+  deleteFile(id: number): void {
+    this.establishmentService.deleteFile(id).subscribe(() => {
+      this.establishment.logo = new UploadedFile();
+      this.estabForm.get('logo')?.reset();
     });
   }
 

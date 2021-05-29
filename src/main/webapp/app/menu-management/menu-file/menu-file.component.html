@@ -1,21 +1,19 @@
-<div class="container">
+<div class="container" id="add">
     <form [formGroup]="menuForm">
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row" id="form">
+            <div class="col-md-6" >
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
                 </div>
-            </div>
 
-            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="file">File</label>
+                    <label>File</label>
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <input (change)="onUploadFile($event.target)"
                                    name="files"
-                                   class="form-control"
+                                   class="custom-file-input"
                                    formControlName="uploadedFile"
                                    id="file"
                                    type="file"
@@ -34,32 +32,35 @@
                     Ajouter
                 </button>
             </div>
+            <div class="col-md-3" >
+                <div id="qrcode" >
+                    <qrcode #parent [qrdata]="data"  [width]="size" [errorCorrectionLevel]="'M'" [elementType]="'img' " ></qrcode>
+                </div>
+            </div>
         </div>
     </form>
 </div>
-<br>
-<br>
-<div class="container">
-    <div class="row" *ngIf="menu">
-        <div class="col-md-3">
-            <div class="card">
-                <img *ngIf="menu.uploadedFile.type === 'PDF'" src="/content/images/logo.png"  class="card-img-top">
-                <img *ngIf="menu.uploadedFile.type !== 'PDF'" [src]="getImageUrl(menu.uploadedFile)" class="card-img-top">
+
+    <div class="row card" *ngIf="menu">
+            <div class="col-md-12" >
+            <button class="btn btn-outline-secondary" (click)="saveAsImage(parent)">download QRCode</button>
+            <div>
+                <h5 class="card-title">{{menu.name}}</h5>
+                <img *ngIf="menu.uploadedFile.type === 'PDF'" src="/content/images/PDF.png"  class="card-img-top" id="pdf">
+                <img *ngIf="menu.uploadedFile.type !== 'PDF'" [src]="getImageUrl(menu.uploadedFile)" class="card-img-top" id="image">
 
                 <div class="card-body">
-                    <h5 class="card-title">{{menu.name}}</h5>
-                    <button (click)="delete(menu.id)" class="btn btn-danger btn-sm" type="button">
-                        <span class="d-none d-md-inline">Delete</span>
-                    </button>
                     <button [routerLink]="[menu.id, 'edit']"
-                            class="btn btn-primary btn-sm"
+                            class="btn btn-outline-info"
                             queryParamsHandling="merge"
                             type="submit">
                         <span class="d-none d-md-inline">Edit</span>
+                    </button>
+
+                    <button (click)="delete(menu.id)" class="btn btn-light" type="button">
+                        <span class="d-none d-md-inline">Delete</span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-

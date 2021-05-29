@@ -1,7 +1,7 @@
-<nav class="navbar navbar-light navbar-expand-md bg-light">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
 
-        <span class="navbar-title">QRMenu</span> <span class="navbar-version">{{ version }}</span>
+        <span class="navbar-title">QRMenu</span>
     </a>
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
@@ -19,7 +19,18 @@
 
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
           <li *jhiHasAnyAuthority="'ROLE_USER'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-<!--                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="menu">-->
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/establishment" (click)="collapseNavbar()">
+                    <span>
+                      <!--  <fa-icon icon="home"></fa-icon>-->
+                        <span>Establishments</span>
+                    </span>
+                </a>
+            </li>
+
+
+              <!--               <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="menu">-->
 <!--                    <span>-->
 <!--                       &lt;!&ndash; <fa-icon icon="th-list"></fa-icon> &ndash;&gt;-->
 <!--                        <span>-->
@@ -40,7 +51,7 @@
 <!--                        </a>-->
 <!--                    </li>-->
 <!--                </ul>-->
-            </li>
+
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
@@ -142,3 +153,5 @@
         </ul>
     </div>
 </nav>
+<button (click)="previousState()" class="btn btn-outline-secondary float-lg-left" type="submit"> Return</button>
+

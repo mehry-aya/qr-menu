@@ -29,9 +29,14 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
           path: 'menu-management/:idEstab',
           loadChildren: () => import('./menu-management/menu-management.module').then(m => m.MenuManagementModule),
         },
+
         {
           path: 'establishment',
           loadChildren: () => import('./establishment/establishment.module').then(m => m.EstablishmentModule),
+        },
+        {
+          path: 'menu/:idFile',
+          loadChildren: () => import('./pdf-view/pdf-view.module').then(m => m.PdfViewModule),
         },
 
         ...LAYOUT_ROUTES,

@@ -25,7 +25,7 @@
     "useSass": true,
     "clientPackageManager": "npm",
     "clientFramework": "angularX",
-    "clientTheme": "simplex",
+    "clientTheme": "Sketchy",
     "clientThemeVariant": "light",
     "creationTimestamp": 1614285940631,
     "testFrameworks": [],

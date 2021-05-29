@@ -1,44 +1,50 @@
 <div class="container" *ngIf="establishment">
         <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" role="form">
             <div class="row">
-
-                <div class="col-md-5">
-                    <label>Logo</label>
+                <div class="form-group">
                     <div class="row">
                         <img *ngIf="establishment.logo" [src]="establishment.logo.path">
                     </div>
-                    <div class="row">
+                    <label>Logo</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
                     <input (change)="onUploadFile($event.target)"
                            formControlName="logo"
                            id="file"
                            name="files"
                            type="file"
                            accept="image/*">
+
+                        <label class="custom-file-label"
+                               for="file">{{establishment?.logo?.name}}
+                        </label>
+                        </div>
+                    <div class="input-group-append">
+                        <button class="input-group-text" (click)="deleteFile(logo.id)" [disabled]="!logo">Delete</button>
                     </div>
                 </div>
+                </div>
+                <div class="col-1"></div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label for="name">Name</label>
                         <input class="form-control" formControlName="name" id="name" placeholder="name"
-                               type="text">
+                                  type="text">
 
-                        <label>Category</label>
+                        <label for="category">Category</label>
                         <input class="form-control" formControlName="category" id="category" placeholder="category"
                                type="text">
 
-                        <label>Adress</label>
+                        <label for="adress">Adress</label>
                         <input class="form-control" formControlName="adress" id="adress" placeholder="adress"
                                type="text">
 
-                        <label>Contact</label>
+                        <label for="contact">Contact</label>
                         <input class="form-control" formControlName="contact" id="contact" placeholder="contact"
                                type="text">
 
                         <div class="row">
-                            <div class="col-md-2">
-                                <button (click)="previousState()" class="btn btn-outline-warning float-lg-left" type="submit"> Return</button>
-                            </div>
                             <div class="col-md-8">
                             </div>
                             <div class="col-md-3">
