@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   showNavigationIndicators = false;
   images = [1055, 194, 368].map(n => `https://picsum.photos/id/${n}/900/500`);
 
-  constructor(config: NgbCarouselConfig, private accountService: AccountService, private loginModalService: LoginModalService) {
+  constructor(private config: NgbCarouselConfig, private accountService: AccountService, private loginModalService: LoginModalService) {
     // customize default values of carousels used by this component tree
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;

@@ -19,29 +19,19 @@ public class DigitalMenu extends Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 3, max = 256)
-    @Column(name = "category", length = 256)
-    private String category;
-
-
-    @OneToMany(mappedBy = "digitalMenu", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonManagedReference
-    private List<Product> products;
-
+     @OneToMany(mappedBy = "digitalMenu", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+     @JsonManagedReference
+     private List<Category> categories;
 
     public DigitalMenu() {
     }
 
-    public DigitalMenu(@Size(min = 3, max = 256) String category) {
-        this.category = category;
+  public List<Category> getCategories() {
+        return categories;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -52,21 +42,5 @@ public class DigitalMenu extends Menu implements Serializable {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-
-    @Override
-    public String toString() {
-        return "DigitalMenu{" +
-            "id=" + id +
-            ", category='" + category + '\'' +
-            ", products=" + products +
-            '}';
-    }
 }

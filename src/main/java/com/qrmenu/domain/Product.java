@@ -15,7 +15,10 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column(name = "level")
+    private Long level;
 
     @Size (min= 1, max= 256)
     @Column(name = "name", length = 256)
@@ -28,43 +31,54 @@ public class Product implements Serializable {
     @Column(name = "description", length = 512)
     private String description;
 
-    @Size (min= 1, max= 256)
-    @Column(name = "image", length = 256)
-    private String image;
 
     @Column(name = "rating")
     private Long rating;
 
     @ManyToOne
     @JsonBackReference
-    private DigitalMenu digitalMenu;
+    private Category category;
 
+    @OneToOne
+    @JoinColumn(name = "uploadedFile_id" , referencedColumnName = "id")
+    private UploadedFile image;
 
     public Product() {
     }
 
-    public Product(long id, @Size(min = 1, max = 256) String name, float price, @Size(min = 1, max = 256) String description, @Size(min = 1, max = 256) String image, Long rating) {
+    public Product(Long id, @Size(min = 1, max = 256) String name, float price, @Size(min = 1, max = 256) String description,
+                   Long rating, UploadedFile image, Long level, Category category ) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.image = image;
         this.rating= rating;
+        this.image = image;
+        this.category = category;
+        this.level = level;
     }
 
-    public DigitalMenu getDigitalMenu() {
-        return digitalMenu;
+    public UploadedFile getImage() {
+        return image;
     }
 
-    public void setDigitalMenu(DigitalMenu digitalMenu) {
-        this.digitalMenu = digitalMenu;
+    public void setImage(UploadedFile uploadedFile) {
+        this.image = uploadedFile;
     }
 
-    public long getId() {
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -100,23 +114,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public Long getLevel() {
+        return level;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", price=" + price +
-            ", description='" + description + '\'' +
-            ", image='" + image + '\'' +
-            ", rating='" + rating + '\'' +
-            '}';
+    public void setLevel(Long level) {
+        this.level = level;
     }
 }

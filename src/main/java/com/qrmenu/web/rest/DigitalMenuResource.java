@@ -1,6 +1,7 @@
 package com.qrmenu.web.rest;
 
 import com.qrmenu.domain.DigitalMenu;
+import com.qrmenu.domain.MenuFiles;
 import com.qrmenu.repository.DigitalMenuRepository;
 import com.qrmenu.service.DigitalMenuService;
 import org.slf4j.Logger;
@@ -26,19 +27,24 @@ public class DigitalMenuResource {
         this.digitalMenuService = digitalMenuService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<DigitalMenu> createDigitalMenu(@Valid @RequestBody DigitalMenu digitalMenus) {
-        return ResponseEntity.ok(this.digitalMenuService.addDigitalMenu(digitalMenus));
+    @PostMapping("/add/{id}")
+    public ResponseEntity<DigitalMenu> createDigitalMenu(@Valid @RequestBody DigitalMenu digitalMenus, @PathVariable("id") Long id_estab) {
+        return ResponseEntity.ok(this.digitalMenuService.addDigitalMenu(digitalMenus, id_estab));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DigitalMenu> getDigitalMenu(@PathVariable("id") long id) {
+    @GetMapping("/getone/{id}")
+    public ResponseEntity<DigitalMenu> getDigitalMenu(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.digitalMenuService.getDigitalMenu(id));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<DigitalMenu>> getAllDigitalMenu() {
         return ResponseEntity.ok(this.digitalMenuService.findAllDigitalMenu());
+    }
+
+    @GetMapping("/establishment/{id}")
+    public ResponseEntity<DigitalMenu> getMenuFileByEstablishment(@PathVariable("id") Long idEstab){
+        return ResponseEntity.ok(this.digitalMenuService.findDigitalMenusByEstablishment(idEstab));
     }
 
     @PutMapping("/update")

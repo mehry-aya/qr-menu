@@ -233,7 +233,7 @@ label {
   margin-top: 25px !important;
 }
 
-.carousel-inner {
+jhi-home .carousel-inner {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -242,6 +242,9 @@ label {
 
 jhi-login-modal {
   background: #f7f7e2 !important;
+}
+jhi-digital-menu .carousel-inner {
+  width: 30cm;
 }
 
 .modal-title {
