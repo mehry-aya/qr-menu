@@ -11,20 +11,23 @@ export class CategoryService {
   private apiServerUrl = SERVER_API_URL + 'api/category';
   constructor(private http: HttpClient) {}
 
-  public addCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(this.apiServerUrl, category);
+  public addCategory(category: Category, id: number): Observable<Category> {
+    return this.http.post<Category>(`${this.apiServerUrl}/add/${id}`, category);
+  }
+  public getCategoriesByMenu(id: number): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiServerUrl}/digitalmenu/${id}`);
   }
 
   public getCategory(id: number): Observable<Category> {
-    return this.http.get<Category>(`${this.apiServerUrl}/${id}`);
+    return this.http.get<Category>(`${this.apiServerUrl}/getone/${id}`);
   }
 
   public updateCategory(category: Category): Observable<Category> {
-    return this.http.put<Category>(this.apiServerUrl, category);
+    return this.http.put<Category>(this.apiServerUrl + '/update', category);
   }
 
   public deleteCategory(id: number): Observable<{}> {
-    return this.http.delete(`${this.apiServerUrl}/${id}`);
+    return this.http.delete(`${this.apiServerUrl}/delete/${id}`);
   }
 
   public getAllCategories(): Observable<any[]> {

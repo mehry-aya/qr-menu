@@ -9,6 +9,7 @@ import { EditMenuFileModule } from 'app/menu-management/menu-file/edit-menu-file
 import { MenuManagementComponent } from './menu-management.component';
 import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ProductModule } from 'app/product/product.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReactiveFormsModule,
     EditMenuFileModule,
     QRCodeModule,
+    ProductModule,
   ],
   declarations: [MenuFileComponent, DigitalMenuComponent, MenuManagementComponent],
 })

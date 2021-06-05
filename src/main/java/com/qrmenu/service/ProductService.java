@@ -1,6 +1,8 @@
 package com.qrmenu.service;
 
+import com.qrmenu.domain.Category;
 import com.qrmenu.domain.Product;
+import com.qrmenu.repository.CategoryRepository;
 import com.qrmenu.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +17,23 @@ import java.util.Optional;
 public class ProductService {
     private final Logger log = LoggerFactory.getLogger(ProductService.class);
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+
     }
 
-    public Product addProduct(Product products){
-        return this.productRepository.save(products);
+    public Product addProduct(Product products, long idCat){
+       Product newProduct = this.productRepository.save(products);
+       Optional<Category> optionalCategory = this.categoryRepository.findById(idCat);
+       if (optionalCategory.isPresent()) {
+           Category category = optionalCategory.get();
+           category.getProducts().add(products);
+           this.categoryRepository.save(category);
+       }
+        return newProduct;
     }
 
     public List<Product> findAllProducts(){

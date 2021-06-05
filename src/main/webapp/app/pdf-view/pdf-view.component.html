@@ -1,5 +1,17 @@
-
-<pdf-viewer *ngIf="menu" src="../{{menu.uploadedFile.path}}" [render-text]="true" style="display: block;">
-    </pdf-viewer>
+<div *ngIf="menu" class="container">
+    <div>{{menu.name}}</div>
+    <div class="row">
+        <div *ngFor="let category of menu.categories " class="col-md-12">
+            <h4>{{category.name}}{{category.level}}</h4>
+            <div *ngFor="let product of category.products "class="row">
+                <div class="col-1"></div>
+                <div class="col-md-11">
+                    <h5>{{product.name}}{{product.level}}</h5>
+                    <h6>{{product.price}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 

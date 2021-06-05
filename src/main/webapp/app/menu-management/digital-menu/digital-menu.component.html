@@ -1,10 +1,12 @@
 <div class="row">
-<div class="col-md-3" style="background: white"></div>
-
-    <div class="col-md-9">
+    <div class="col-md-12" *ngIf="digitalMenu">
+        <button (click)="delete(digitalMenu.id)" class="btn btn-light" type="button">
+            <span class="d-none d-md-inline">Delete</span>
+        </button>
+        <h1>{{digitalMenu.name}}</h1>
     <form [formGroup]="menuForm" >
-        <div class="row" id="form">
-            <div class="col-md-6" >
+        <div class="row">
+            <div class="col-md-5" >
                 <div class="form-group" *ngIf="!digitalMenu">
                     <label for="name">Name</label>
                     <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
@@ -16,7 +18,9 @@
                            placeholder="{{digitalMenu.name}}"
                            type="text">
                 </div>
+            </div>
 
+            <div class="col-md-3" >
                 <button *ngIf="!digitalMenu"
                         (click)="addMenu()"
                         [disabled]="menuForm.invalid"
@@ -32,29 +36,134 @@
                     <span class="d-none d-md-inline">Edit</span>
                 </button>
             </div>
-            <div class="col-md-3" >
+
+            <div class="col-md-4" >
                 <div id="qrcode" >
+                    <qrcode #parent [qrdata]="data"  [width]="250" [errorCorrectionLevel]="'M'" [elementType]="'img' " ></qrcode>
                 </div>
             </div>
         </div>
     </form>
 
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" *ngFor="let category of digitalMenu.categories">
+                    <a class="nav-link {{category?.id === selectedCategory?.id ? 'active' : ''}}"  role="tab" data-toggle="tab" (click)="selectCategory(category)">{{category.name}}</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link {{ !selectedCategory.id ? 'active' : ''}}"  role="tab" data-toggle="tab" (click)="selectCategory(null)" for="add"><fa-icon icon="plus-circle" [fixedWidth]="true" [size]="'1x'"></fa-icon></a>
+                </li>
+            </ul>
+        </div>
 <div class="row card" *ngIf="digitalMenu" >
     <div class="col-md-12" >
         <div>
-            <h5 class="card-title">{{digitalMenu.name}}</h5><hr>
-
             <div class="card-body">
+                    <div class="tab-content" *ngIf="selectedCategory.id">
+                        <button (click)="deleteCategory(selectedCategory.id)" class="btn btn-light" type="button" id="deleteCategory">
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Product</button>
+                        <p> {{selectedCategory?.products?.length}}</p>
+                        <div *ngFor="let product of selectedCategory?.products">
+                        <jhi-product [product]="product" [category]="selectedCategory"></jhi-product>
+                        </div>
+                    </div>
+                    <div class="tab-content" *ngIf="!selectedCategory.id" >
+                        <form [formGroup]="categoryForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" id="category">
+                                        <label for="categoryName">Name</label>
+                                        <input class="form-control" formControlName="name" id="categoryName" placeholder="name"
+                                               type="text">
 
-                <button (click)="delete(digitalMenu.id)" class="btn btn-light" type="button">
-                    <span class="d-none d-md-inline">Delete</span>
-                </button>
+                                        <label for="level">Level</label>
+                                        <input class="form-control" formControlName="level" id="level"
+                                               placeholder="level"
+                                               type="text">
+
+                                        <div>
+                                            <button (click)="addCategory()" [disabled]="categoryForm.invalid" class="btn btn-outline-success float-lg-right"
+                                                    type="submit">Ajouter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Product</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="productForm">
+            <div class="row">
+                <div class="form-group">
+                    <label>Image</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input (change)="onUploadFile($event.target)"
+                                   formControlName="image"
+                                   id="file"
+                                   name="files"
+                                   type="file"
+                                   accept="image/*">
+
+                            <label class="custom-file-label"
+                                   for="file">{{image?.name}}
+
+                            </label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="input-group-text" (click)="deleteFile(image.id)" [disabled]="!image">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="productName">Name</label>
+                        <input class="form-control" formControlName="name" id="productName" placeholder="name"
+                               type="text">
+
+                        <label for="description">Description</label>
+                        <input class="form-control" formControlName="description" id="description"
+                               placeholder="description"
+                               type="text">
+
+                        <label for="price">Price</label>
+                        <input class="form-control" formControlName="price" id="price" placeholder="price"
+                               type="text">
+
+                        <label for="rating">Rating</label>
+                        <input class="form-control" formControlName="rating" id="rating" placeholder="rating"
+                               type="text">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="addProduct()" [disabled]="productForm.invalid" class="btn btn-outline-success float-lg-right"
+                type="button">Ajouter
+        </button>    </div>
+</ng-template>
+
+
 
 
 
@@ -108,29 +217,7 @@
 <!--    <ngb-accordion #acc="ngbAccordion" >-->
 <!--        <ngb-panel id="toggle-2" title="New Category">-->
 <!--            <ng-template ngbPanelContent>-->
-<!--                <form [formGroup]="productForm">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="name">Name</label>-->
-<!--                                <input class="form-control" formControlName="name" id="name" placeholder="name"-->
-<!--                                       type="text">-->
 
-<!--                                <label for="level">Level</label>-->
-<!--                                <input class="form-control" formControlName="level" id="level"-->
-<!--                                       placeholder="level"-->
-<!--                                       type="text">-->
-
-<!--                                <div>-->
-<!--                                    <button (click)="add()" [disabled]="productForm.invalid" class="btn btn-outline-success float-lg-right"-->
-<!--                                            type="submit">Ajouter-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-2"></div>-->
-<!--                    </div>-->
-<!--                </form>-->
 <!--            </ng-template>-->
 <!--        </ngb-panel>-->
 <!--    </ngb-accordion>-->
@@ -140,77 +227,11 @@
 <!--        <ngb-accordion #acc="ngbAccordion">-->
 <!--            <ngb-panel id="toggle-1" title="New Product">-->
 <!--                <ng-template ngbPanelContent>-->
-<!--                    <form [formGroup]="productForm">-->
-<!--                        <div class="row">-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Image</label>-->
-<!--                                <div class="input-group mb-3">-->
-<!--                                    <div class="custom-file">-->
-<!--                                        <input (change)="onUploadFile($event.target)"-->
-<!--                                               formControlName="logo"-->
-<!--                                               id="file"-->
-<!--                                               name="files"-->
-<!--                                               type="file"-->
-<!--                                               accept="image/*">-->
 
-<!--                                        <label class="custom-file-label"-->
-<!--                                               for="file">{{image?.name}}-->
-
-<!--                                        </label>-->
-<!--                                    </div>-->
-<!--                                    <div class="input-group-append">-->
-<!--                                        <button class="input-group-text" (click)="deleteFile(image.id)" [disabled]="!image">Delete</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-1"></div>-->
-
-<!--                            <div class="col-md-6">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label for="categoryName">Name</label>-->
-<!--                                    <input class="form-control" formControlName="name" id="categoryName" placeholder="name"-->
-<!--                                           type="text">-->
-
-<!--                                    <label for="description">Description</label>-->
-<!--                                    <input class="form-control" formControlName="description" id="description"-->
-<!--                                           placeholder="description"-->
-<!--                                           type="text">-->
-
-<!--                                    <label for="price">Price</label>-->
-<!--                                    <input class="form-control" formControlName="price" id="price" placeholder="price"-->
-<!--                                           type="text">-->
-
-<!--                                    <label for="rating">Rating</label>-->
-<!--                                    <input class="form-control" formControlName="rating" id="rating" placeholder="rating"-->
-<!--                                           type="text">-->
-
-<!--                                    <div>-->
-<!--                                        <button (click)="add()" [disabled]="productForm.invalid" class="btn btn-outline-success float-lg-right"-->
-<!--                                                type="submit">Ajouter-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-2"></div>-->
-<!--                        </div>-->
-<!--                    </form>-->
 <!--                </ng-template>-->
 <!--            </ngb-panel>-->
 <!--        </ngb-accordion>-->
-<!--        <div class="row" *ngFor="let product of productList">-->
-<!--            <div class="col-md-3">-->
-<!--                <img *ngIf="product.image"-->
-<!--                     [src]="getImageUrl(product.image)">-->
-<!--            </div>-->
-<!--        <div class="col-md-9">-->
-<!--        <div class="card-body ">-->
-<!--            <h4 class="card-title">{{product.name}}</h4>-->
-<!--            <p class="card-text">{{product.description}}</p>-->
-<!--            <p class="card-text">{{product.price}}</p>-->
-<!--            <ngb-rating [rate]="3"></ngb-rating>-->
-<!--        </div>-->
-<!--        </div>-->
-<!--        </div>-->
+
 <!--    </div>-->
 
 

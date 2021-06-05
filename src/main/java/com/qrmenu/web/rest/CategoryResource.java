@@ -44,6 +44,10 @@ public class CategoryResource {
     public ResponseEntity<List<Category>> getAllCategories() {
         return ResponseEntity.ok(this.categoryService.findAllCategories());
     }
+    @GetMapping("/digitalmenu/{id}")
+    public ResponseEntity<List<Category>> getCategoriesByMenu(@PathVariable("id") Long idMenu){
+        return ResponseEntity.ok(this.categoryService.findCategoriesByMenu(idMenu));
+    }
 
     @PutMapping("/update")
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) {

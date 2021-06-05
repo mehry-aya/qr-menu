@@ -2,6 +2,7 @@ package com.qrmenu.service;
 
 import com.qrmenu.domain.Category;
 import com.qrmenu.domain.DigitalMenu;
+import com.qrmenu.domain.Establishment;
 import com.qrmenu.repository.CategoryRepository;
 import com.qrmenu.repository.DigitalMenuRepository;
 import org.slf4j.Logger;
@@ -39,6 +40,10 @@ public class CategoryService {
 
     public List<Category> findAllCategories() {
         return this.categoryRepository.findAll();
+    }
+    public List<Category> findCategoriesByMenu(Long idMenu) {
+        DigitalMenu digitalMenu = this.digitalMenuRepository.findById(idMenu).get();
+        return digitalMenu.getCategories();
     }
 
     public Category getCategory(Long id) {

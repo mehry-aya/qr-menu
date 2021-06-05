@@ -1,4 +1,5 @@
 import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
+import { Category } from 'app/category/category.model';
 
 export class Product {
   id!: number;
@@ -7,4 +8,5 @@ export class Product {
   description!: string;
   price!: number;
   rating!: number;
+  category: Category = new Category();
 }

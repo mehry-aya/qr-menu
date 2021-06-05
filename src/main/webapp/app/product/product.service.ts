@@ -13,8 +13,8 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  public addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiServerUrl, product);
+  public addProduct(product: Product, id: number): Observable<Product> {
+    return this.http.post<Product>(`${this.apiServerUrl}/add/${id}`, product);
   }
 
   public upload(formData: FormData): Observable<UploadedFile> {
@@ -22,15 +22,15 @@ export class ProductService {
   }
 
   public getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiServerUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiServerUrl}/getone/${id}`);
   }
 
   public updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(this.apiServerUrl, product);
+    return this.http.put<Product>(this.apiServerUrl + '/update', product);
   }
 
   public deleteProduct(id: number): Observable<{}> {
-    return this.http.delete(`${this.apiServerUrl}/${id}`);
+    return this.http.delete(`${this.apiServerUrl}/delete/${id}`);
   }
 
   public deleteFile(id: number): Observable<{}> {

@@ -48,11 +48,11 @@ public class ProductResource  {
 
     }
 
-@PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@Valid @RequestBody Product products)   {
+@PostMapping("/add/{id}")
+    public ResponseEntity<Product> addProduct(@Valid @RequestBody Product products, @PathVariable("id") long idCat)   {
     UploadedFile uploadedFile = this.uploadService.getById(products.getImage().getId());
     products.setImage(uploadedFile);
-    return ResponseEntity.ok(this.productService.addProduct(products));
+    return ResponseEntity.ok(this.productService.addProduct(products,idCat));
 }
     @PostMapping("/upload")
     public ResponseEntity<UploadedFile> uploadFiles(@RequestParam("files") MultipartFile multipartFile) throws IOException {

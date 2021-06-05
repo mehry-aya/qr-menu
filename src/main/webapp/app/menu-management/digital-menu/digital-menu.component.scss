@@ -169,3 +169,32 @@ body {
 img {
   width: 250px;
 }
+.nav {
+  display: flex;
+}
+ul {
+  inline-size: fit-content;
+  display: inline-block;
+}
+ul.nav {
+  margin-bottom: -27px;
+  margin-left: 3px;
+}
+h1 {
+  text-align: center;
+}
+.btn-outline-info {
+  margin-top: 30px;
+  margin-left: -20px;
+}
+.btn-light {
+  float: right;
+  margin-top: -35px;
+}
+#deleteCategory.btn-light {
+  margin: auto;
+}
+#category {
+  padding-left: 250px;
+  padding-right: 250px;
+}
