@@ -27,12 +27,12 @@ public class ProductService {
 
     public Product addProduct(Product products, long idCat){
        Product newProduct = this.productRepository.save(products);
-       Optional<Category> optionalCategory = this.categoryRepository.findById(idCat);
-       if (optionalCategory.isPresent()) {
-           Category category = optionalCategory.get();
-           category.getProducts().add(products);
-           this.categoryRepository.save(category);
-       }
+//       Optional<Category> optionalCategory = this.categoryRepository.findById(idCat);
+//       if (optionalCategory.isPresent()) {
+//           Category category = optionalCategory.get();
+//           category.getProducts().add(products);
+//           this.categoryRepository.save(category);
+//       }
         return newProduct;
     }
 

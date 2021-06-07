@@ -20,7 +20,7 @@ export class DigitalMenuService {
     return this.http.get<DigitalMenu>(`${this.apiServerUrl}/getone/${id}`);
   }
 
-  public getAlldigitalMenusByEstablishment(id: number): Observable<DigitalMenu> {
+  public getDigitalMenuByEstablishment(id: number): Observable<DigitalMenu> {
     return this.http.get<DigitalMenu>(`${this.apiServerUrl}/establishment/${id}`);
   }
 

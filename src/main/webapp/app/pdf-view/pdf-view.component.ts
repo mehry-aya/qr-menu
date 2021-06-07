@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MenuFiles } from 'app/menu-management/menu-file/menu-files.model';
-import { MenuFileService } from 'app/menu-management/menu-file/menu-file.service';
 import { DigitalMenuService } from 'app/menu-management/digital-menu/digital-menu.service';
 import { DigitalMenu } from 'app/menu-management/digital-menu/digital-menu.model';
+import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
 
 @Component({
   selector: 'jhi-pdf-view',
@@ -13,13 +12,8 @@ import { DigitalMenu } from 'app/menu-management/digital-menu/digital-menu.model
 export class PdfViewComponent implements OnInit {
   public id!: number;
   public menu!: DigitalMenu;
-  public src!: string | null;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private menuFileService: MenuFileService,
-    private digitalMenuService: DigitalMenuService
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private digitalMenuService: DigitalMenuService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(data => {
@@ -29,5 +23,8 @@ export class PdfViewComponent implements OnInit {
         this.menu = menu;
       });
     });
+  }
+  public getImageUrl(image: UploadedFile): string {
+    return image.path;
   }
 }

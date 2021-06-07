@@ -1,7 +1,9 @@
 package com.qrmenu.service;
 
 import com.qrmenu.domain.Establishment;
+import com.qrmenu.domain.User;
 import com.qrmenu.repository.EstablishmentRepository;
+import com.qrmenu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,18 +18,26 @@ import java.util.Optional;
 public class EstablishmentService {
     private final Logger log = LoggerFactory.getLogger(MenuFilesService.class);
     private final EstablishmentRepository establishmentRepository;
+    private final UserRepository userRepository;
 
-    public EstablishmentService(EstablishmentRepository establishmentRepository) {
+    public EstablishmentService(EstablishmentRepository establishmentRepository, UserRepository userRepository) {
         this.establishmentRepository = establishmentRepository;
+        this.userRepository= userRepository;
     }
 
     public Establishment addEstablishment(Establishment establishments){
         return this.establishmentRepository.save(establishments);
     }
 
+
     public List<Establishment> findAllEstablishments(){
         return this.establishmentRepository.findAll();
     }
+
+//    public List<Establishment> findEstablishmentByCurrentUser(String login){
+//        User currentUser = this.userRepository.findOneByLogin(login).get();
+//       return currentUser.getEstablishments();
+//    }
 
     public Establishment getEstablishment(long id){
         return this.establishmentRepository.getOne(id);

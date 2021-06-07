@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from './product.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ProductService } from 'app/product/product.service';
 import { NgbModal, NgbModalConfig, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
 import { DigitalMenu } from 'app/menu-management/digital-menu/digital-menu.model';
 import { DigitalMenuService } from 'app/menu-management/digital-menu/digital-menu.service';
 import { Category } from 'app/category/category.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-product',
@@ -23,13 +24,22 @@ export class ProductComponent implements OnInit {
   @Input() product!: Product;
   @Input() category!: Category;
 
-  constructor(private productService: ProductService, private fb: FormBuilder, private digitalMenuService: DigitalMenuService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private fb: FormBuilder,
+    private digitalMenuService: DigitalMenuService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(data => {
+      this.id = data['idEstab'];
+    });
+  }
 
   public deleteProduct(id: any): void {
     this.productService.deleteProduct(id).subscribe(() => {
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });

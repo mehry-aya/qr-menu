@@ -43,7 +43,7 @@ public class DigitalMenuResource {
     }
 
     @GetMapping("/establishment/{id}")
-    public ResponseEntity<DigitalMenu> getMenuFileByEstablishment(@PathVariable("id") Long idEstab){
+    public ResponseEntity<DigitalMenu> getDigitalMenuByEstablishment(@PathVariable("id") Long idEstab){
         return ResponseEntity.ok(this.digitalMenuService.findDigitalMenusByEstablishment(idEstab));
     }
 

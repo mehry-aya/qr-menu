@@ -86,6 +86,10 @@ public class EstablishmentResource {
     public ResponseEntity<List<Establishment>> getAllEstablishment (){
         return ResponseEntity.ok(this.establishmentService.findAllEstablishments());
 }
+//@GetMapping("/{login}")
+//public ResponseEntity<List<Establishment>> getEstablishmentsByCurrentUser(@PathVariable("login") String login){
+//        return ResponseEntity.ok(this.establishmentService.findEstablishmentByCurrentUser(login));
+//}
 @PutMapping("/update")
     public ResponseEntity<Establishment> updateEstablishment(@RequestBody Establishment establishments){
         return ResponseEntity.ok(this.establishmentService.updateEstablishment(establishments));

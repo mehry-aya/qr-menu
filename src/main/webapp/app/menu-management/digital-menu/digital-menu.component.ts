@@ -23,8 +23,6 @@ export class DigitalMenuComponent implements OnInit {
   public selectedCategory: any;
   public image!: UploadedFile;
   public digitalMenu!: DigitalMenu;
-  public productList: Product[] = [];
-  public categoryList: Category[] = [];
   public productForm: FormGroup;
   public data!: string;
 
@@ -52,8 +50,9 @@ export class DigitalMenuComponent implements OnInit {
     this.activatedRoute.params.subscribe(data => {
       this.id = data['idEstab'];
 
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
+
         this.data = 'http://192.168.1.11:8080/menu/' + this.digitalMenu.id;
         this.selectedCategory = this.digitalMenu.categories ? this.digitalMenu.categories[0] : undefined;
         this.updateForm(value);
@@ -86,7 +85,7 @@ export class DigitalMenuComponent implements OnInit {
     this.productService.addProduct(product, this.selectedCategory.id).subscribe(() => {
       this.productForm.reset();
       this.image = new UploadedFile();
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });
@@ -135,7 +134,7 @@ export class DigitalMenuComponent implements OnInit {
     category.digitalMenu.id = this.digitalMenu.id;
     this.categoryService.addCategory(category, this.digitalMenu.id).subscribe(() => {
       this.categoryForm.reset();
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });
@@ -146,7 +145,7 @@ export class DigitalMenuComponent implements OnInit {
     digitalMenu.name = this.menuForm.get('name')?.value;
     this.digitalMenuService.addDigitalMenu(digitalMenu, this.id).subscribe(() => {
       this.menuForm.reset();
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });
@@ -154,14 +153,14 @@ export class DigitalMenuComponent implements OnInit {
 
   public deleteCategory(id: any): void {
     this.categoryService.deleteCategory(id).subscribe(() => {
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });
   }
   public delete(id: any): void {
     this.digitalMenuService.deleteDigitalMenu(id).subscribe(() => {
-      this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+      this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
       });
     });
@@ -190,12 +189,51 @@ export class DigitalMenuComponent implements OnInit {
 
   private onSaveSuccess(): void {
     this.isSaving = false;
-    this.digitalMenuService.getAlldigitalMenusByEstablishment(this.id).subscribe(value => {
+    this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
       this.digitalMenu = value;
     });
   }
 
   private onSaveError(): void {
     this.isSaving = false;
+  }
+
+  saveAsImage(parent: any): any {
+    const parentElement = parent.qrcElement.nativeElement.querySelector('img').src;
+
+    // converts base 64 encoded image to blobData
+    const blobData = this.convertBase64ToBlob(parentElement);
+
+    // saves as image
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      // IE
+      window.navigator.msSaveOrOpenBlob(blobData, 'Qrcode');
+    } else {
+      // chrome
+      const blob = new Blob([blobData], { type: 'image/png' });
+      const url = window.URL.createObjectURL(blob);
+      // window.open(url);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Qrcode';
+      link.click();
+    }
+  }
+
+  private convertBase64ToBlob(Base64Image: any): any {
+    // SPLIT INTO TWO PARTS
+    const parts = Base64Image.split(';base64,');
+    // HOLD THE CONTENT TYPE
+    const imageType = parts[0].split(':')[1];
+    // DECODE BASE64 STRING
+    const decodedData = window.atob(parts[1]);
+    // CREATE UNIT8ARRAY OF SIZE SAME AS ROW DATA LENGTH
+    const uInt8Array = new Uint8Array(decodedData.length);
+    // INSERT ALL CHARACTER CODE INTO UINT8ARRAY
+    for (let i = 0; i < decodedData.length; ++i) {
+      uInt8Array[i] = decodedData.charCodeAt(i);
+    }
+    // RETURN BLOB IMAGE AFTER CONVERSION
+    return new Blob([uInt8Array], { type: imageType });
   }
 }

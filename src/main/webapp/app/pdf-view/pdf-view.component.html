@@ -1,17 +1,35 @@
+<!--<div *ngIf="menu" class="container">-->
+<!--    <div>{{menu.name}}</div>-->
+<!--    <div class="row">-->
+<!--        <div *ngFor="let category of menu.categories " class="col-md-12">-->
+<!--            <h4>{{category.name}}</h4>-->
+<!--            <div *ngFor="let product of category.products "class="row">-->
+<!--                <div class="col-1"></div>-->
+<!--                <div class="col-md-11">-->
+<!--                    <h5>{{product.name}}{{product.rating}}</h5>-->
+<!--                    <h6>{{product.price}}</h6>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div *ngIf="menu" class="container">
     <div>{{menu.name}}</div>
-    <div class="row">
-        <div *ngFor="let category of menu.categories " class="col-md-12">
-            <h4>{{category.name}}{{category.level}}</h4>
-            <div *ngFor="let product of category.products "class="row">
-                <div class="col-1"></div>
-                <div class="col-md-11">
-                    <h5>{{product.name}}{{product.level}}</h5>
-                    <h6>{{product.price}}</h6>
+    <div class="card border-light">
+        <div *ngFor="let category of menu.categories " class="card-header"><h4>{{category.name}}</h4><hr>
+            <div class="card-body">
+                <div class="row" *ngFor="let product of category.products" >
+                    <div class="col-md-4">
+                        <img *ngIf="product.image" [src]="getImageUrl(product.image)">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="card-title">{{product.name}}</h4>
+                        <p class="card-text">{{product.description}}</p>
+                        <p class="card-text">{{product.price}}</p>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

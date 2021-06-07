@@ -1,110 +1,127 @@
 <div class="row">
-    <div class="col-md-12" *ngIf="digitalMenu">
-        <button (click)="delete(digitalMenu.id)" class="btn btn-light" type="button">
-            <span class="d-none d-md-inline">Delete</span>
+    <div class="col-md-12">
+        <button (click)="delete(digitalMenu?.id)" class="btn btn-light" type="button">
+            <fa-icon [fixedWidth]="true" [size]="'1x'" icon="trash"></fa-icon>
+            <span class="d-none d-md-inline">MENU</span>
         </button>
-        <h1>{{digitalMenu.name}}</h1>
-    <form [formGroup]="menuForm" >
-        <div class="row">
-            <div class="col-md-5" >
-                <div class="form-group" *ngIf="!digitalMenu">
-                    <label for="name">Name</label>
-                    <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+        <h1>{{digitalMenu?.name}}</h1>
+        <form [formGroup]="menuForm">
+            <div class="row">
+                <div class="col-md-5">
+                    <div *ngIf="!digitalMenu" class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+                    </div>
+                    <div *ngIf="digitalMenu" [formGroup]="editForm" class="form-group">
+                        <label>Name</label>
+                        <input class="form-control"
+                               formControlName="name"
+                               placeholder="{{digitalMenu?.name}}"
+                               type="text">
+                    </div>
                 </div>
-                <div class="form-group" *ngIf="digitalMenu" [formGroup]="editForm" >
-                    <label>Name</label>
-                    <input class="form-control"
-                           formControlName="name"
-                           placeholder="{{digitalMenu.name}}"
-                           type="text">
-                </div>
-            </div>
 
-            <div class="col-md-3" >
-                <button *ngIf="!digitalMenu"
-                        (click)="addMenu()"
-                        [disabled]="menuForm.invalid"
-                        class="btn btn-outline-success"
-                        type="submit"> Ajouter
-                </button>
-                <button *ngIf="digitalMenu"
-                        (click)="save()"
-                        [disabled]="editForm.invalid || isSaving "
-                        class="btn btn-outline-info"
-                        queryParamsHandling="merge"
-                        type="submit">
-                    <span class="d-none d-md-inline">Edit</span>
-                </button>
-            </div>
+                <div class="col-md-3">
+                    <button (click)="addMenu()"
+                            *ngIf="!digitalMenu"
+                            [disabled]="menuForm.invalid"
+                            class="btn btn-outline-success"
+                            type="submit"> Ajouter
+                    </button>
+                    <button (click)="save()"
+                            *ngIf="digitalMenu"
+                            [disabled]="editForm.invalid || isSaving "
+                            class="btn btn-outline-info"
+                            queryParamsHandling="merge"
+                            type="submit">
+                        <fa-icon [fixedWidth]="true" [size]="'1x'" icon="edit"></fa-icon>
+                    </button>
+                </div>
 
-            <div class="col-md-4" >
-                <div id="qrcode" >
-                    <qrcode #parent [qrdata]="data"  [width]="250" [errorCorrectionLevel]="'M'" [elementType]="'img' " ></qrcode>
+                <div *ngIf="digitalMenu" class="col-md-4">
+                    <div id="qrcode">
+                        <qrcode #parent [elementType]="'img' " [errorCorrectionLevel]="'M'" [qrdata]="data"
+                                [width]="250"></qrcode>
+                        <div class="row" id="download">
+                            <a (click)="saveAsImage(parent)">
+                                <fa-icon [fixedWidth]="true" [size]="'2x'" icon="download"></fa-icon>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
         <div class="row">
             <ul class="nav nav-tabs">
-                <li class="nav-item" *ngFor="let category of digitalMenu.categories">
-                    <a class="nav-link {{category?.id === selectedCategory?.id ? 'active' : ''}}"  role="tab" data-toggle="tab" (click)="selectCategory(category)">{{category.name}}</a>
+                <li *ngFor="let category of digitalMenu?.categories" class="nav-item">
+                    <a (click)="selectCategory(category)" class="nav-link {{category?.id === selectedCategory?.id ? 'active' : ''}}"
+                       data-toggle="tab" role="tab">{{category.name}}</a>
                 </li>
-                <li class="nav-item" >
-                    <a class="nav-link {{ !selectedCategory.id ? 'active' : ''}}"  role="tab" data-toggle="tab" (click)="selectCategory(null)" for="add"><fa-icon icon="plus-circle" [fixedWidth]="true" [size]="'1x'"></fa-icon></a>
+                <li class="nav-item">
+                    <a (click)="selectCategory(null)" class="nav-link {{ !selectedCategory?.id ? 'active' : ''}}" data-toggle="tab"
+                       for="add" role="tab">
+                        <fa-icon [fixedWidth]="true" [size]="'1x'" icon="plus"></fa-icon>
+                        <span> Category</span></a>
                 </li>
             </ul>
         </div>
-<div class="row card" *ngIf="digitalMenu" >
-    <div class="col-md-12" >
-        <div>
-            <div class="card-body">
-                    <div class="tab-content" *ngIf="selectedCategory.id">
-                        <button (click)="deleteCategory(selectedCategory.id)" class="btn btn-light" type="button" id="deleteCategory">
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Product</button>
-                        <p> {{selectedCategory?.products?.length}}</p>
-                        <div *ngFor="let product of selectedCategory?.products">
-                        <jhi-product [product]="product" [category]="selectedCategory"></jhi-product>
+        <div *ngIf="digitalMenu" class="row card">
+            <div class="col-md-12">
+                <div>
+                    <div class="card-body">
+                        <div *ngIf="selectedCategory?.id" class="tab-content">
+                            <button (click)="deleteCategory(selectedCategory?.id)" class="btn btn-light" id="deleteCategory"
+                                    type="button">
+                                <fa-icon [fixedWidth]="true" [size]="'1x'" icon="trash"></fa-icon>
+                                <span class="d-none d-md-inline"> Category</span>
+                            </button>
+                            <button (click)="open(content)" class="btn btn-lg btn-outline-primary">
+                                <fa-icon [fixedWidth]="true" [size]="'1x'" icon="plus"></fa-icon>
+                                <span> Product</span></button>
+                            <!--                        <p> {{selectedCategory?.products?.length}}</p>-->
+                            <div *ngFor="let product of selectedCategory?.products">
+                                <jhi-product [category]="selectedCategory" [product]="product"></jhi-product>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tab-content" *ngIf="!selectedCategory.id" >
-                        <form [formGroup]="categoryForm">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group" id="category">
-                                        <label for="categoryName">Name</label>
-                                        <input class="form-control" formControlName="name" id="categoryName" placeholder="name"
-                                               type="text">
+                        <div *ngIf="!selectedCategory?.id" class="tab-content">
+                            <form [formGroup]="categoryForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" id="category">
+                                            <label for="categoryName">Name</label>
+                                            <input class="form-control" formControlName="name" id="categoryName"
+                                                   placeholder="name"
+                                                   type="text">
 
-                                        <label for="level">Level</label>
-                                        <input class="form-control" formControlName="level" id="level"
-                                               placeholder="level"
-                                               type="text">
+                                            <label for="level">Level</label>
+                                            <input class="form-control" formControlName="level" id="level"
+                                                   placeholder="level"
+                                                   type="text">
 
-                                        <div>
-                                            <button (click)="addCategory()" [disabled]="categoryForm.invalid" class="btn btn-outline-success float-lg-right"
-                                                    type="submit">Ajouter
-                                            </button>
+                                            <div>
+                                                <button (click)="addCategory()" [disabled]="categoryForm.invalid"
+                                                        class="btn btn-outline-success float-lg-right"
+                                                        type="submit">Ajouter
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-2"></div>
                                 </div>
-                                <div class="col-md-2"></div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">New Product</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -116,11 +133,11 @@
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <input (change)="onUploadFile($event.target)"
+                                   accept="image/*"
                                    formControlName="image"
                                    id="file"
                                    name="files"
-                                   type="file"
-                                   accept="image/*">
+                                   type="file">
 
                             <label class="custom-file-label"
                                    for="file">{{image?.name}}
@@ -128,7 +145,8 @@
                             </label>
                         </div>
                         <div class="input-group-append">
-                            <button class="input-group-text" (click)="deleteFile(image.id)" [disabled]="!image">Delete</button>
+                            <button (click)="deleteFile(image.id)" [disabled]="!image" class="input-group-text">Delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -160,79 +178,7 @@
     <div class="modal-footer">
         <button (click)="addProduct()" [disabled]="productForm.invalid" class="btn btn-outline-success float-lg-right"
                 type="button">Ajouter
-        </button>    </div>
+        </button>
+    </div>
 </ng-template>
-
-
-
-
-
-
-<!--<div class="col-md-9">-->
-<!--    <form [formGroup]="menuForm">-->
-<!--    <div class="col-md-4" >-->
-<!--    <div class="form-group">-->
-<!--        <label for="name">Name</label>-->
-<!--        <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">-->
-<!--    </div>-->
-<!--        <button (click)="addMenu()" [disabled]="menuForm.invalid" class="btn btn-outline-success" type="submit">-->
-<!--            Ajouter-->
-<!--        </button>-->
-<!--    </div>-->
-
-<!--    </form>-->
-<!--</div>-->
-
-<!--    <div class="row card" *ngIf="digitalMenu">-->
-<!--        <div class="col-md-12" ></div>-->
-<!--            <h5 class="card-title">{{digitalMenu.name}}</h5>-->
-
-<!--                <div class="card-body">-->
-
-
-<!--                    <button [routerLink]="[digitalMenu.id, 'edit']"-->
-<!--                            class="btn btn-outline-info"-->
-<!--                            queryParamsHandling="merge"-->
-<!--                            type="submit">-->
-<!--                        <span class="d-none d-md-inline">Edit</span>-->
-<!--                    </button>-->
-
-<!--                    <button (click)="delete(digitalMenu.id)" class="btn btn-light" type="button">-->
-<!--                        <span class="d-none d-md-inline">Delete</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--</div>-->
-
-
-
-
-
-
-
-
-
-
-
-<!--    <ngb-accordion #acc="ngbAccordion" >-->
-<!--        <ngb-panel id="toggle-2" title="New Category">-->
-<!--            <ng-template ngbPanelContent>-->
-
-<!--            </ng-template>-->
-<!--        </ngb-panel>-->
-<!--    </ngb-accordion>-->
-
-<!--    <div class="card border-light " >-->
-<!--        <div class="card-header">category</div>-->
-<!--        <ngb-accordion #acc="ngbAccordion">-->
-<!--            <ngb-panel id="toggle-1" title="New Product">-->
-<!--                <ng-template ngbPanelContent>-->
-
-<!--                </ng-template>-->
-<!--            </ngb-panel>-->
-<!--        </ngb-accordion>-->
-
-<!--    </div>-->
-
-
 

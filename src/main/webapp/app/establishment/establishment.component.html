@@ -22,7 +22,9 @@
                                     </label>
                                 </div>
                                 <div class="input-group-append">
-                                    <button class="input-group-text" (click)="deleteFile(logo.id)" [disabled]="!logo">Delete</button>
+                                    <button class="input-group-text" (click)="deleteFile(logo.id)" [disabled]="!logo">
+                                        <fa-icon icon="trash" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+                                    </button>
                                 </div>
                         </div>
                         </div>
@@ -86,9 +88,12 @@
                 <div class="float-lg-right">
                     <button [routerLink]="[establishment.id, 'edit']"
                             class="btn btn-outline-info"
-                            type="submit">edit
+                            type="submit">
+                        <fa-icon icon="edit" [fixedWidth]="true" [size]="'1x'"></fa-icon>
                     </button>
-                    <button class="btn btn-light" (click)="delete(establishment.id)" type="button">delete</button>
+                    <button class="btn btn-light" (click)="delete(establishment.id)" type="button">
+                        <fa-icon icon="trash" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+                    </button>
                 </div>
 
 

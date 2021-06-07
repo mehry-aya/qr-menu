@@ -1,16 +1,22 @@
-
-
-
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <img *ngIf="product.image"
-             [src]="getImageUrl(product.image)">
+             [src]="getImageUrl(product.image)"
+        [width]="250">
     </div>
-<div class="col-md-9">
+<div class="col-md-">
 <div class="card-body ">
     <h4 class="card-title">{{product.name}}</h4>
     <p class="card-text">{{product.description}}</p>
     <p class="card-text">{{product.price}}</p>
 </div>
+    <div class="float-lg-left">
+        <a [routerLink]="['product',product.id, 'edit']">
+            <fa-icon icon="edit" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+        </a>
+        <a (click)="deleteProduct(product.id)">
+            <fa-icon icon="trash" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+        </a>
+    </div>
 </div>
 </div>
