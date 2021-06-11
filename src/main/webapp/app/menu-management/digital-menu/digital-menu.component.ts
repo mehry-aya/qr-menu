@@ -53,7 +53,7 @@ export class DigitalMenuComponent implements OnInit {
       this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
 
-        this.data = 'http://192.168.1.12:8080/menu/' + this.digitalMenu.id;
+        this.data = 'http://192.168.1.14:8080/menu/' + this.digitalMenu.id;
         this.selectedCategory = this.digitalMenu.categories ? this.digitalMenu.categories[0] : undefined;
         this.updateForm(value);
       });
