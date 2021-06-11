@@ -3,9 +3,11 @@ package com.qrmenu.web.rest;
 import com.qrmenu.domain.Establishment;
 import com.qrmenu.domain.UploadedFile;
 import com.qrmenu.repository.EstablishmentRepository;
+import com.qrmenu.repository.UserRepository;
 import com.qrmenu.service.EstablishmentService;
 import com.qrmenu.service.UploadService;
 import liquibase.util.file.FilenameUtils;
+import com.qrmenu.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,22 +38,28 @@ public class EstablishmentResource {
     private final EstablishmentRepository establishmentRepository;
     private final EstablishmentService establishmentService;
     private final UploadService uploadService;
+    private final UserRepository userRepository;
 
 
     @Autowired
     ServletContext context;
 
     public EstablishmentResource(EstablishmentRepository establishmentRepository, EstablishmentService establishmentService,
-                                 UploadService uploadService) {
+                                 UploadService uploadService, UserRepository userRepository) {
         this.establishmentRepository = establishmentRepository;
         this.establishmentService = establishmentService;
         this.uploadService = uploadService;
-
+        this.userRepository = userRepository;
     }
 @PostMapping("/add")
     public ResponseEntity<Establishment> createEstablishment(@Valid @RequestBody Establishment establishments){
         UploadedFile logo = this.uploadService.getById(establishments.getLogo().getId());
         establishments.setLogo(logo);
+        SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .ifPresent(user -> {
+                establishments.setUser(user);
+            });
         return ResponseEntity.ok(this.establishmentService.addEstablishment(establishments));
     }
 
@@ -86,10 +94,10 @@ public class EstablishmentResource {
     public ResponseEntity<List<Establishment>> getAllEstablishment (){
         return ResponseEntity.ok(this.establishmentService.findAllEstablishments());
 }
-//@GetMapping("/{login}")
-//public ResponseEntity<List<Establishment>> getEstablishmentsByCurrentUser(@PathVariable("login") String login){
-//        return ResponseEntity.ok(this.establishmentService.findEstablishmentByCurrentUser(login));
-//}
+@GetMapping("/user/{id}")
+public ResponseEntity<List<Establishment>> getEstablishmentsByCurrentUser(@PathVariable("id") long idUser){
+        return ResponseEntity.ok(this.establishmentService.findEstablishmentByCurrentUser(idUser));
+}
 @PutMapping("/update")
     public ResponseEntity<Establishment> updateEstablishment(@RequestBody Establishment establishments){
         return ResponseEntity.ok(this.establishmentService.updateEstablishment(establishments));

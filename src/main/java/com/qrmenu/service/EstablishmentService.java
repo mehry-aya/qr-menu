@@ -34,10 +34,10 @@ public class EstablishmentService {
         return this.establishmentRepository.findAll();
     }
 
-//    public List<Establishment> findEstablishmentByCurrentUser(String login){
-//        User currentUser = this.userRepository.findOneByLogin(login).get();
-//       return currentUser.getEstablishments();
-//    }
+    public List<Establishment> findEstablishmentByCurrentUser(long idUser){
+        User currentUser = this.userRepository.findById(idUser).get();
+       return currentUser.getEstablishments();
+    }
 
     public Establishment getEstablishment(long id){
         return this.establishmentRepository.getOne(id);
@@ -52,9 +52,9 @@ public class EstablishmentService {
                 establishment.setAdress(establishments.getAdress());
                 establishment.setContact(establishments.getContact());
                 establishment.setLogo(establishments.getLogo());
-                establishment.setUser(establishments.getUser());
-                establishment.setDigitalMenu(establishments.getDigitalMenu());
-                establishment.setMenuFiles(establishments.getMenuFiles());
+//                establishment.setUser(establishments.getUser());
+//                establishment.setDigitalMenu(establishments.getDigitalMenu());
+//                establishment.setMenuFiles(establishments.getMenuFiles());
             return this.establishmentRepository.save(establishment);
             } else {
                 throw new NotFoundObjectException();

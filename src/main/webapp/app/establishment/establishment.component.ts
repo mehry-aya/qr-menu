@@ -3,6 +3,8 @@ import { Establishment } from 'app/establishment/establishment.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EstablishmentService } from 'app/establishment/establishment.service';
 import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'app/core/user/user.model';
 
 @Component({
   selector: 'jhi-establishment',
@@ -14,13 +16,18 @@ export class EstablishmentComponent implements OnInit {
   public estabForm: FormGroup;
   public logo!: UploadedFile;
   public establishment!: Establishment;
+  public id!: number;
+  public user!: User;
 
-  constructor(private fb: FormBuilder, private establishmentService: EstablishmentService) {
+  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private establishmentService: EstablishmentService) {
     this.estabForm = this.createForm();
   }
 
   ngOnInit(): void {
-    this.establishmentService.getAllEstablishments().subscribe(value => {
+    // this.activatedRoute.params.subscribe(data => {
+    //   this.id = data['idUser'];
+
+    this.establishmentService.getEstablishmentsByCurrentUser(this.user.id).subscribe(value => {
       this.estabList = value;
     });
   }
@@ -40,12 +47,11 @@ export class EstablishmentComponent implements OnInit {
     establishment.adress = this.estabForm.get('adress')?.value;
     establishment.contact = this.estabForm.get('contact')?.value;
     establishment.category = this.estabForm.get('category')?.value;
-
     establishment.logo = this.logo;
     this.establishmentService.addEstablishment(establishment).subscribe(() => {
       this.estabForm.reset();
       this.logo = new UploadedFile();
-      this.establishmentService.getAllEstablishments().subscribe(value => {
+      this.establishmentService.getEstablishmentsByCurrentUser(this.id).subscribe(value => {
         this.estabList = value;
       });
     });
@@ -63,7 +69,7 @@ export class EstablishmentComponent implements OnInit {
 
   public delete(id: any): void {
     this.establishmentService.deleteEstablishment(id).subscribe(() => {
-      this.establishmentService.getAllEstablishments().subscribe(value => {
+      this.establishmentService.getEstablishmentsByCurrentUser(this.id).subscribe(value => {
         this.estabList = value;
       });
     });
