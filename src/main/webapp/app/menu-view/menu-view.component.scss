@@ -1,0 +1,48 @@
+.border-light {
+  max-width: 20cm;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-header {
+  background: white;
+}
+h3 {
+  text-align: center;
+  letter-spacing: -2px;
+  font-family: system-ui;
+  font-size: 40px;
+  text-transform: capitalize;
+  margin-top: 5px;
+  font-weight: 700;
+  color: rosybrown;
+  text-shadow: 2px 3px 5px #00000054;
+}
+h5 {
+  text-align: center;
+  font-size: xxx-large;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 3px 5px #00000054;
+  margin-top: 30px;
+}
+img {
+  width: 200px;
+  border: solid #f7f7e2;
+}
+.col-md-6 {
+  margin-top: 30px;
+}
+
+hr {
+  //margin-bottom: -14px;
+}
+#price {
+  float: right;
+}
+.card-title {
+  margin-left: -20px;
+  margin-bottom: -0.25em;
+  margin-top: 10px;
+  letter-spacing: -2px;
+}

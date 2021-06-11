@@ -53,7 +53,7 @@ export class DigitalMenuComponent implements OnInit {
       this.digitalMenuService.getDigitalMenuByEstablishment(this.id).subscribe(value => {
         this.digitalMenu = value;
 
-        this.data = 'http://192.168.1.11:8080/menu/' + this.digitalMenu.id;
+        this.data = 'http://192.168.1.12:8080/menu/' + this.digitalMenu.id;
         this.selectedCategory = this.digitalMenu.categories ? this.digitalMenu.categories[0] : undefined;
         this.updateForm(value);
       });
@@ -69,7 +69,7 @@ export class DigitalMenuComponent implements OnInit {
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      rating: ['', [Validators.required]],
+      level: ['', [Validators.required]],
       image: [null, [Validators.required]],
     });
   }
@@ -79,7 +79,7 @@ export class DigitalMenuComponent implements OnInit {
     product.name = this.productForm.get('name')?.value;
     product.description = this.productForm.get('description')?.value;
     product.price = this.productForm.get('price')?.value;
-    product.rating = this.productForm.get('rating')?.value;
+    product.level = this.productForm.get('level')?.value;
     product.image = this.image;
     product.category.id = this.selectedCategory.id;
     this.productService.addProduct(product, this.selectedCategory.id).subscribe(() => {

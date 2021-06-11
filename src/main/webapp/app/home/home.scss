@@ -2,13 +2,34 @@
 Main page styles
 ========================================================================== */
 
-//.hipster {
-//  display: inline-block;
-//  width: 347px;
-//  height: 497px;
-//  background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
-//  background-size: contain;
-//}
+.image {
+  width: 347px;
+  height: 480px;
+  background: url('../../content/images/affiche.jpg') no-repeat;
+  background-size: contain;
+  float: right;
+  margin: 25px -103px 25px 65px;
+}
+p {
+  margin-top: 120px;
+  margin-bottom: 10rem;
+  text-align: justify;
+  font-size: 22px;
+  text-shadow: 0 0 black;
+  color: dimgray;
+}
+.partners {
+  background: white;
+  margin: 0px -29px -15px -30px;
+  height: 8cm;
+}
+h2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  color: rosybrown;
+  margin-bottom: -5px;
+}
 //
 ///* wait autoprefixer update to allow simple generation of high pixel density media query */
 //@media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -20,6 +41,13 @@ Main page styles
 //    background: url('../../content/images/jhipster_family_member_0_head-192.png') no-repeat center top;
 //  }
 //}
-img {
-  height: 250px;
+//.picsum-img-wrapper {
+//  height: 6cm;
+//}
+.partners-img {
+  margin-left: auto;
+  margin-right: auto;
 }
+//.container {
+//  background: url('../../content/images/background.jpg')
+//}

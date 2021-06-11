@@ -1,29 +1,81 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-6">
+        <p>
+        La mise en place d'un menu disponible en ligne, accesible grâce à un QR code fait donc partie
+        des services indispensables à offrir à vos clients.
+        Nous créons une page en ligne qui inclut vos menus sous forme PDF ou IMAGE et un menu digital
+        ainsi qu'un QR Code unique chacun et des accès vous permettant de mettre à jour vos menus à tout moment.
+        </p>
+    </div>
+    <div class="col-md-6 image"></div>
+    </div>
+    <div class="row partners">
+        <h2>Join Our Partners And Keep your life Safe & Easy</h2>
+
+        <div class="row partners-img">
+        <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+            <ng-template ngbSlide *ngFor="let image of images">
+                <div class="picsum-img-wrapper">
+                    <img [src]="image" alt="Random slide" [width]="400">
+                </div>
+                <div class="carousel-caption">
+
+                </div>
+            </ng-template>
+        </ngb-carousel>
+        <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+            <ng-template ngbSlide *ngFor="let image of images">
+                <div class="picsum-img-wrapper">
+                    <img [src]="image" alt="Random slide" [width]="400">
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </ng-template>
+        </ngb-carousel>
+            <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+                <ng-template ngbSlide *ngFor="let image of images">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="image" alt="Random slide" [width]="400">
+                    </div>
+                    <div class="carousel-caption">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+
+            <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+                <ng-template ngbSlide *ngFor="let image of images">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="image" alt="Random slide" [width]="400">
+                    </div>
+                    <div class="carousel-caption">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+
+    </div>
+    </div>
+    </div>
+
+
+
 <!--<h1>HELLO PEOPLE!</h1>-->
-<div class="row">
-<div class="col-md-4 ">
-<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-    <ng-template ngbSlide *ngFor="let image of images">
-        <div class="picsum-img-wrapper">
-            <img [src]="image" alt="Random slide">
-        </div>
-                    <div class="carousel-caption">
+<!--<div class="row">-->
+<!--<div class="col-md-4 ">-->
+<!--<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">-->
+<!--    <ng-template ngbSlide *ngFor="let image of images">-->
+<!--        <div class="picsum-img-wrapper">-->
+<!--            <img [src]="image" alt="Random slide">-->
+<!--        </div>-->
+<!--                    <div class="carousel-caption">-->
 
-                    </div>
-    </ng-template>
-</ngb-carousel>
-<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-    <ng-template ngbSlide *ngFor="let image of images">
-        <div class="picsum-img-wrapper">
-            <img [src]="image" alt="Random slide">
-        </div>
-                    <div class="carousel-caption">
+<!--                    </div>-->
+<!--    </ng-template>-->
+<!--</ngb-carousel>-->
 
-                    </div>
-    </ng-template>
-</ngb-carousel>
-</div>
+<!--</div>-->
 
-<div class="col-md-8">
-    <h2>Join Our Partners And Keep your life Safe & Easy</h2>
-</div>
-</div>
+<!--<div class="col-md-8">-->
+<!--    <h2>Join Our Partners And Keep your life Safe & Easy</h2>-->
+<!--</div>-->
+<!--</div>-->

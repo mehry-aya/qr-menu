@@ -1,1 +1,60 @@
-<p>edit-product works!</p>
+
+<form [formGroup]="editForm" (ngSubmit)="save()" role="form">
+    <h2>Edit Product</h2>
+    <div class="row">
+        <div class="form-group">
+            <div class="row">
+                <img [src]="product?.image?.path">
+            </div>
+            <label>Image</label>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input (change)="onUploadFile($event.target)"
+                           accept="image/*"
+                           formControlName="image"
+                           id="file"
+                           name="files"
+                           type="file">
+
+                    <label class="custom-file-label"
+                           for="file">{{product?.image?.name}}
+
+                    </label>
+                </div>
+                <div class="input-group-append">
+                    <button (click)="deleteFile(image.id)" [disabled]="!image" class="input-group-text">
+                        <fa-icon icon="trash" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="productName">Name</label>
+                <input class="form-control" formControlName="name" id="productName" placeholder="name"
+                       type="text">
+
+                <label for="description">Description</label>
+                <input class="form-control" formControlName="description" id="description"
+                       placeholder="description"
+                       type="text">
+
+                <label for="price">Price</label>
+                <input class="form-control" formControlName="price" id="price" placeholder="price"
+                       type="text">
+
+                <label for="productLevel">Level</label>
+                <input class="form-control" formControlName="level" id="productLevel" placeholder="level"
+                       type="text">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <button [disabled]="editForm.invalid || isSaving" class="btn btn-outline-success float-lg-right"
+            type="submit">Save Changes
+    </button>
+    </div>
+</form>

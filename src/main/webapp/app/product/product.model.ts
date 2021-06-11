@@ -8,5 +8,6 @@ export class Product {
   description!: string;
   price!: number;
   rating!: number;
+  level!: number;
   category: Category = new Category();
 }

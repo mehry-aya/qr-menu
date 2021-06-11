@@ -7,7 +7,7 @@
     <artifactId>qr-menu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>QR Menu</name>
+    <name>QRMenu</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

@@ -33,7 +33,7 @@ export class MenuFileComponent implements OnInit {
 
       this.menuFileService.getAllMenuFileByEstablishment(this.id).subscribe(value => {
         this.menu = value;
-        this.data = 'http://192.168.1.11:8080/' + this.menu.uploadedFile.path;
+        this.data = 'http://192.168.1.12:8080/' + this.menu.uploadedFile.path;
       });
     });
   }

@@ -31,7 +31,9 @@
                             </div>
                         </div>
                         <div class="input-group-append">
-                            <button class="input-group-text" (click)="deleteFile(menu.uploadedFile.id)" [disabled]="!menu.uploadedFile">Delete</button>
+                            <button class="input-group-text" (click)="deleteFile(menu.uploadedFile.id)" [disabled]="!menu.uploadedFile">
+                                <fa-icon icon="trash" [fixedWidth]="true" [size]="'1x'"></fa-icon>
+                            </button>
                         </div>
                     </div>
                 </div>

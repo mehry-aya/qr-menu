@@ -40,6 +40,7 @@ export class EstablishmentComponent implements OnInit {
     establishment.adress = this.estabForm.get('adress')?.value;
     establishment.contact = this.estabForm.get('contact')?.value;
     establishment.category = this.estabForm.get('category')?.value;
+
     establishment.logo = this.logo;
     this.establishmentService.addEstablishment(establishment).subscribe(() => {
       this.estabForm.reset();

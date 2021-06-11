@@ -36,7 +36,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'menu/:idFile',
-          loadChildren: () => import('./pdf-view/pdf-view.module').then(m => m.PdfViewModule),
+          loadChildren: () => import('./menu-view/menu-view.module').then(m => m.MenuViewModule),
         },
 
         ...LAYOUT_ROUTES,

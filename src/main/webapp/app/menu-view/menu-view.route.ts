@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { PdfViewComponent } from './pdf-view.component';
+import { MenuViewComponent } from './menu-view.component';
 
 export const PDF_ROUTE: Routes = [
   {
     path: '',
-    component: PdfViewComponent,
+    component: MenuViewComponent,
     data: {
       authorities: [],
       pageTitle: 'MENU',

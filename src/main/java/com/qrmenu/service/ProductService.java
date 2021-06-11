@@ -53,7 +53,6 @@ public class ProductService {
             product.setPrice(products.getPrice());
             product.setImage(products.getImage());
             product.setRating(products.getRating());
-            product.setCategory(products.getCategory());
             product.setLevel(products.getLevel());
 
             return this.productRepository.save(product);

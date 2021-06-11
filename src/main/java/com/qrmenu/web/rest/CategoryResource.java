@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/category")
@@ -45,7 +46,7 @@ public class CategoryResource {
         return ResponseEntity.ok(this.categoryService.findAllCategories());
     }
     @GetMapping("/digitalmenu/{id}")
-    public ResponseEntity<List<Category>> getCategoriesByMenu(@PathVariable("id") Long idMenu){
+    public ResponseEntity<Set<Category>> getCategoriesByMenu(@PathVariable("id") Long idMenu){
         return ResponseEntity.ok(this.categoryService.findCategoriesByMenu(idMenu));
     }
 

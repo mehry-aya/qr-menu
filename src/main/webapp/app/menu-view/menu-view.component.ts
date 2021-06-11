@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DigitalMenuService } from 'app/menu-management/digital-menu/digital-menu.service';
-import { DigitalMenu } from 'app/menu-management/digital-menu/digital-menu.model';
-import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
+import { DigitalMenuService } from '../menu-management/digital-menu/digital-menu.service';
+import { DigitalMenu } from '../menu-management/digital-menu/digital-menu.model';
+import { UploadedFile } from '../menu-management/menu-file/uploaded-file.model';
 
 @Component({
   selector: 'jhi-pdf-view',
-  templateUrl: './pdf-view.component.html',
-  styleUrls: ['./pdf-view.component.scss'],
+  templateUrl: './menu-view.component.html',
+  styleUrls: ['./menu-view.component.scss'],
 })
-export class PdfViewComponent implements OnInit {
+export class MenuViewComponent implements OnInit {
   public id!: number;
   public menu!: DigitalMenu;
 

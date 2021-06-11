@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -21,16 +22,16 @@ public class DigitalMenu extends Menu implements Serializable {
 
      @OneToMany(mappedBy = "digitalMenu", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
      @JsonManagedReference
-     private List<Category> categories;
+     private Set<Category> categories;
 
     public DigitalMenu() {
     }
 
-  public List<Category> getCategories() {
+  public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 

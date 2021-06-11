@@ -41,7 +41,7 @@ public class CategoryService {
     public List<Category> findAllCategories() {
         return this.categoryRepository.findAll();
     }
-    public List<Category> findCategoriesByMenu(Long idMenu) {
+    public Set<Category> findCategoriesByMenu(Long idMenu) {
         DigitalMenu digitalMenu = this.digitalMenuRepository.findById(idMenu).get();
         return digitalMenu.getCategories();
     }

@@ -45,7 +45,7 @@ Generic styles
   margin-top: 20px;
   border: none;
   background: rgba(245, 245, 220, 0.82);
-  margin-top: 60px;
+  margin-top: 0px;
   height: auto;
 }
 .jh-card jhi-menu-management {
@@ -256,4 +256,8 @@ jhi-digital-menu .carousel-inner {
 jhi-register .btn-primary {
   float: right;
   margin: 25px 55px 100px;
+}
+.footer.row {
+  margin-left: 3.5cm !important;
+  margin-right: 3cm !important;
 }

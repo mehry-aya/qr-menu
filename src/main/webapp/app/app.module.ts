@@ -17,7 +17,7 @@ import { MenuManagementModule } from 'app/menu-management/menu-management.module
 import { ReactiveFormsModule } from '@angular/forms';
 import { EstablishmentModule } from 'app/establishment/establishment.module';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { PdfViewModule } from 'app/pdf-view/pdf-view.module';
+import { MenuViewModule } from 'app/menu-view/menu-view.module';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
@@ -33,7 +33,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     QrMenuAppRoutingModule,
     MenuManagementModule,
     EstablishmentModule,
-    PdfViewModule,
+    MenuViewModule,
     ReactiveFormsModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

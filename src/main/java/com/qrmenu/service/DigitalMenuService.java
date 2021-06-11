@@ -43,7 +43,7 @@ public class DigitalMenuService {
         return establishment.getDigitalMenu();
     }
     public DigitalMenu getDigitalMenu(Long id) {
-        return this.digitalMenuRepository.getOne(id);
+        return this.digitalMenuRepository.findById(id).get();
     }
 
     public DigitalMenu updateDigitalMenu(DigitalMenu digitalMenus) {
