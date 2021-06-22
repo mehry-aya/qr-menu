@@ -3,17 +3,22 @@ import { ActivatedRoute } from '@angular/router';
 import { DigitalMenuService } from '../menu-management/digital-menu/digital-menu.service';
 import { DigitalMenu } from '../menu-management/digital-menu/digital-menu.model';
 import { UploadedFile } from '../menu-management/menu-file/uploaded-file.model';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-pdf-view',
   templateUrl: './menu-view.component.html',
   styleUrls: ['./menu-view.component.scss'],
+  providers: [NgbRatingConfig],
 })
 export class MenuViewComponent implements OnInit {
   public id!: number;
   public menu!: DigitalMenu;
 
-  constructor(private activatedRoute: ActivatedRoute, private digitalMenuService: DigitalMenuService) {}
+  constructor(private config: NgbRatingConfig, private activatedRoute: ActivatedRoute, private digitalMenuService: DigitalMenuService) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(data => {

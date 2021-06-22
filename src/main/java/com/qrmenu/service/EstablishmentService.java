@@ -4,6 +4,7 @@ import com.qrmenu.domain.Establishment;
 import com.qrmenu.domain.User;
 import com.qrmenu.repository.EstablishmentRepository;
 import com.qrmenu.repository.UserRepository;
+import com.qrmenu.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +35,10 @@ public class EstablishmentService {
         return this.establishmentRepository.findAll();
     }
 
-    public List<Establishment> findEstablishmentByCurrentUser(long idUser){
-        User currentUser = this.userRepository.findById(idUser).get();
-       return currentUser.getEstablishments();
+    public List<Establishment> findEstablishmentByCurrentUser(){
+        return SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .get().getEstablishments();
     }
 
     public Establishment getEstablishment(long id){

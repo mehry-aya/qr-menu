@@ -3,12 +3,12 @@
         <div class="row" id="form">
             <div class="col-md-6" >
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+                    <label for="name">Nom</label>
+                    <input class="form-control" formControlName="name" id="name" placeholder="nom" type="text">
                 </div>
 
                 <div class="form-group">
-                    <label>File</label>
+                    <label>Fichier</label>
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <input (change)="onUploadFile($event.target)"
@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-3" >
                 <div id="qrcode" >
-                    <qrcode #parent [qrdata]="data"  [width]="size" [errorCorrectionLevel]="'M'" [elementType]="'img' " ></qrcode>
+                    <qrcode #parent [qrdata]="data"  [width]="size" [errorCorrectionLevel]="'M'" [elementType]="'img' "  ></qrcode>
                     <div class="row" id="download">
                         <a (click)="saveAsImage(parent)">
                             <fa-icon [fixedWidth]="true" [size]="'2x'" icon="download"></fa-icon>

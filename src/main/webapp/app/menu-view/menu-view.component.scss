@@ -27,22 +27,28 @@ h5 {
   margin-top: 30px;
 }
 img {
-  width: 200px;
+  width: 250px;
   border: solid #f7f7e2;
+  margin: 20px 0px 10px 0;
+  height: 230px;
 }
 .col-md-6 {
   margin-top: 30px;
 }
 
-hr {
-  //margin-bottom: -14px;
-}
 #price {
   float: right;
 }
 .card-title {
-  margin-left: -20px;
+  margin-left: 30px;
   margin-bottom: -0.25em;
   margin-top: 10px;
   letter-spacing: -2px;
+}
+#description {
+  margin-left: 25px;
+}
+
+.content {
+  margin-bottom: 75px;
 }

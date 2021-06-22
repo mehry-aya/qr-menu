@@ -94,9 +94,9 @@ public class EstablishmentResource {
     public ResponseEntity<List<Establishment>> getAllEstablishment (){
         return ResponseEntity.ok(this.establishmentService.findAllEstablishments());
 }
-@GetMapping("/user/{id}")
-public ResponseEntity<List<Establishment>> getEstablishmentsByCurrentUser(@PathVariable("id") long idUser){
-        return ResponseEntity.ok(this.establishmentService.findEstablishmentByCurrentUser(idUser));
+@GetMapping("/user")
+public ResponseEntity<List<Establishment>> getEstablishmentsByCurrentUser(){
+        return ResponseEntity.ok(this.establishmentService.findEstablishmentByCurrentUser());
 }
 @PutMapping("/update")
     public ResponseEntity<Establishment> updateEstablishment(@RequestBody Establishment establishments){

@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-md-5">
                     <div *ngIf="!digitalMenu" class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+                        <label for="name">Nom</label>
+                        <input class="form-control" formControlName="name" id="name" placeholder="nom" type="text">
                     </div>
                     <div *ngIf="digitalMenu" [formGroup]="editForm" class="form-group">
                         <label>Name</label>
@@ -40,9 +40,8 @@
 
                 <div *ngIf="digitalMenu" class="col-md-4">
                     <div id="qrcode">
-                        <qrcode #parent [elementType]="'img' " [errorCorrectionLevel]="'M'" [qrdata]="data"
-                                [width]="250"></qrcode>
-                        <div class="row" id="download">
+                        <qrcode #parent [elementType]="'img' " [errorCorrectionLevel]="'M'" [qrdata]="data" [width]="250"></qrcode>
+                        <div class="row" id="download" *ngIf="digitalMenu">
                             <a (click)="saveAsImage(parent)">
                                 <fa-icon [fixedWidth]="true" [size]="'2x'" icon="download"></fa-icon>
                             </a>
@@ -52,7 +51,7 @@
             </div>
         </form>
 
-        <div class="row">
+        <div class="row" *ngIf="digitalMenu">
             <ul class="nav nav-tabs">
                 <li *ngFor="let category of digitalMenu?.categories" class="nav-item">
                     <a (click)="selectCategory(category)" class="nav-link {{category?.id === selectedCategory?.id ? 'active' : ''}}"
@@ -62,7 +61,7 @@
                     <a (click)="selectCategory(null)" class="nav-link {{ !selectedCategory?.id ? 'active' : ''}}" data-toggle="tab"
                        for="add" role="tab">
                         <fa-icon [fixedWidth]="true" [size]="'1x'" icon="plus"></fa-icon>
-                        <span> Category</span></a>
+                        <span> Categorie</span></a>
                 </li>
             </ul>
         </div>
@@ -74,12 +73,11 @@
                             <button (click)="deleteCategory(selectedCategory?.id)" class="btn btn-light" id="deleteCategory"
                                     type="button">
                                 <fa-icon [fixedWidth]="true" [size]="'1x'" icon="trash"></fa-icon>
-                                <span class="d-none d-md-inline"> Category</span>
+                                <span class="d-none d-md-inline"> Categorie</span>
                             </button>
                             <button (click)="open(content)" class="btn btn-lg btn-outline-primary">
                                 <fa-icon [fixedWidth]="true" [size]="'1x'" icon="plus"></fa-icon>
-                                <span> Product</span></button>
-                            <!--                        <p> {{selectedCategory?.products?.length}}</p>-->
+                                <span> Produit</span></button>
                             <div *ngFor="let product of selectedCategory?.products">
                                 <jhi-product [category]="selectedCategory" [product]="product"></jhi-product>
                             </div>
@@ -89,14 +87,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" id="category">
-                                            <label for="categoryName">Name</label>
+                                            <label for="categoryName">Nom</label>
                                             <input class="form-control" formControlName="name" id="categoryName"
-                                                   placeholder="name"
+                                                   placeholder="nom"
                                                    type="text">
 
-                                            <label for="level">Level</label>
+                                            <label for="level">Ordre</label>
                                             <input class="form-control" formControlName="level" id="level"
-                                                   placeholder="level"
+                                                   placeholder="ordre"
                                                    type="text">
 
                                             <div>
@@ -154,8 +152,8 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="productName">Name</label>
-                        <input class="form-control" formControlName="name" id="productName" placeholder="name"
+                        <label for="productName">Nom</label>
+                        <input class="form-control" formControlName="name" id="productName" placeholder="nom"
                                type="text">
 
                         <label for="description">Description</label>
@@ -163,12 +161,12 @@
                                placeholder="description"
                                type="text">
 
-                        <label for="price">Price</label>
-                        <input class="form-control" formControlName="price" id="price" placeholder="price"
+                        <label for="price">Prix</label>
+                        <input class="form-control" formControlName="price" id="price" placeholder="prix"
                                type="text">
 
-                        <label for="productLevel">Level</label>
-                        <input class="form-control" formControlName="level" id="productLevel" placeholder="level"
+                        <label for="productLevel">Ordre</label>
+                        <input class="form-control" formControlName="level" id="productLevel" placeholder="ordre"
                                type="text">
                     </div>
                 </div>

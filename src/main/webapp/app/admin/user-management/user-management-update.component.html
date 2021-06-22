@@ -2,7 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="myUserLabel">
-                Create or edit a User
+                Ajouter ou Modifier un Utilisateur
             </h2>
 
             <div *ngIf="user">
@@ -21,17 +21,17 @@
                     <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('login')?.errors?.required">
-                            This field is required.
+                            Champs obligatoire*
                         </small>
 
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('login')?.errors?.maxlength">
-                            This field cannot be longer than 50 characters.
+                            Ce champs ne doit pas dépasser 50 caratéres
                         </small>
 
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('login')?.errors?.pattern">
-                            This field can only contain letters, digits and e-mail addresses.
+                            Ce champs doit contenir que des lettres, chiffres et adresse mail.
                         </small>
                     </div>
                 </div>

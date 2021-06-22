@@ -28,8 +28,8 @@ export class EstablishmentService {
     return this.http.get<Establishment[]>(this.apiServerUrl + '/all');
   }
 
-  public getEstablishmentsByCurrentUser(id: number): Observable<Establishment[]> {
-    return this.http.get<Establishment[]>(`${this.apiServerUrl}/user/${id}`);
+  public getEstablishmentsByCurrentUser(): Observable<Establishment[]> {
+    return this.http.get<Establishment[]>(this.apiServerUrl + '/user');
   }
 
   public getEstablishment(id: number): Observable<Establishment> {

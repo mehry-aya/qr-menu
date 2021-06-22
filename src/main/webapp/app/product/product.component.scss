@@ -5,6 +5,7 @@
 a.btn {
   border-color: #f7f7e2;
   margin-left: -7px;
+  margin-bottom: -170px;
 }
 #price {
   margin-left: 44px;
@@ -14,15 +15,19 @@ a.btn {
   margin-left: 20px;
 }
 .row {
-  margin-bottom: 80px;
+  margin-bottom: -18px;
 }
 .content {
   //margin-bottom: -18px;
   background: #f7f7e2;
 }
 img {
-  margin: 10px 0px 10px 0;
+  margin: 20px 0px 10px 0;
+  height: 230px;
 }
 .name {
   margin-top: -6px;
+}
+.col-md-7 {
+  margin-left: -48px;
 }

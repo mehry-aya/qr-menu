@@ -4,21 +4,20 @@
              [src]="getImageUrl(product.image)"
         [width]="250">
     </div>
-<div class="col-md-6">
+<div class="col-md-7">
 <div class="card-body ">
     <h4 class="card-title">{{product.name}}</h4>
     <hr class="name">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <p class="card-text" id="description">{{product.description}}</p>
         </div>
     <div class="col-md-3">
-        <p class="card-text" id="price"> {{product.price}}</p>
-
+        <p class="card-text float-lg-right" id="price"> {{product.price}}</p>
     </div>
     </div>
 </div>
-    <div class="float-lg-left">
+    <div class="float-lg-right">
         <a [routerLink]="['product',product.id, 'edit']"
            class="btn btn-outline-info">
             <fa-icon icon="edit" [fixedWidth]="true" [size]="'1x'"></fa-icon>

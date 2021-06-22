@@ -38,6 +38,8 @@ import {
   faTrash,
   faEdit,
   faDownload,
+  faBuilding,
+  faStore,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
@@ -78,6 +80,8 @@ export const fontAwesomeIcons = [
   faTrash,
   faEdit,
   faDownload,
+  faBuilding,
+  faStore,
   // jhipster-needle-add-icon-import
   faAsterisk,
 ];

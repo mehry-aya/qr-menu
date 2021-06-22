@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" *ngIf="menu">
     <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" role="form">
-        <h2>Edit Menu File</h2>
+        <h2>Modifier Menu</h2>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" formControlName="name" id="name" placeholder="name" type="text">
+                    <label for="name">Nom</label>
+                    <input class="form-control" formControlName="name" id="name" placeholder="nom" type="text">
                     <div
                         *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
                     </div>
@@ -14,7 +14,7 @@
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="file">File</label>
+                    <label for="file">fichier</label>
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <input (change)="onUploadFile($event.target)"
@@ -43,8 +43,8 @@
             <div class="col-md-8">
             </div>
             <div class="col-md-3">
-                <button [disabled]="editForm.invalid || isSaving " class="btn btn-outline-success float-lg-right" type="submit">Save
-                    Changes
+                <button [disabled]="editForm.invalid || isSaving " class="btn btn-outline-success float-lg-right" type="submit">
+                    Enregistrer
                 </button>
             </div>
         </div>

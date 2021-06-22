@@ -11,8 +11,8 @@
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
-                      <!--  <fa-icon icon="home"></fa-icon>-->
-                        <span>Home</span>
+                        <fa-icon icon="home"></fa-icon>
+                        <span>Accueil</span>
                     </span>
                 </a>
             </li>
@@ -20,38 +20,14 @@
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
           <li *jhiHasAnyAuthority="'ROLE_USER'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
 
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/establishment" (click)="collapseNavbar()">
+            <li  class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/establishment/" (click)="collapseNavbar()">
                     <span>
-                      <!--  <fa-icon icon="home"></fa-icon>-->
-                        <span>Establishments</span>
+                        <fa-icon icon="store"></fa-icon>
+                        <span>Etablissements</span>
                     </span>
                 </a>
             </li>
-
-
-              <!--               <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="menu">-->
-<!--                    <span>-->
-<!--                       &lt;!&ndash; <fa-icon icon="th-list"></fa-icon> &ndash;&gt;-->
-<!--                        <span>-->
-<!--                            Menu-->
-<!--                        </span>-->
-<!--                    </span>-->
-<!--                </a>-->
-<!--                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="menu">-->
-<!--                    <li>-->
-<!--                        <a class="dropdown-item" routerLink="/menu-management/{{id}}/menu-file" routerLinkActive="active" (click)="collapseNavbar()">-->
-<!--                            <span>Menu Files</span>-->
-<!--                        </a>-->
-<!--                    </li>-->
-
-<!--                    <li>-->
-<!--                        <a class="dropdown-item" routerLink="/menu-management/{{id}}/digital-menu" routerLinkActive="active" routerLinkActive="active" (click)="collapseNavbar()">-->
-<!--                            <span>Digital Menu</span>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
@@ -63,7 +39,7 @@
                     <li>
                         <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
-                            <span>User management</span>
+                            <span>Gestion d'utilisateur</span>
                         </a>
                     </li>
                     <li>
@@ -108,9 +84,9 @@
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                     <span *ngIf="!getImageUrl()">
-                       <!-- <fa-icon icon="user"></fa-icon> -->
+                        <fa-icon icon="user"></fa-icon>
                         <span>
-                            Account
+                            Compte
                         </span>
                     </span>
                     <span *ngIf="getImageUrl()">
@@ -121,31 +97,31 @@
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
-                            <span>Settings</span>
+                            <span>Paramétres</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="account/password" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
-                            <span>Password</span>
+                            <span>Mot de passe</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-                            <span>Sign out</span>
+                            <span>Se déconnecter</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" (click)="login()" id="login">
                             <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-                            <span>Sign in</span>
+                            <span>S'authentifier</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-                            <span>Register</span>
+                            <span>S'inscrire</span>
                         </a>
                     </li>
                 </ul>
@@ -153,5 +129,5 @@
         </ul>
     </div>
 </nav>
-<button (click)="previousState()" class="btn btn-outline-secondary float-lg-left" type="submit"> Return</button>
+<button (click)="previousState()" class="btn btn-outline-secondary float-lg-left" type="submit"> Retour</button>
 

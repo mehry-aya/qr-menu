@@ -1,9 +1,9 @@
 <div>
     <h2>
-        <span id="user-management-page-heading">Users</span>
+        <span id="user-management-page-heading">Utilisateurs</span>
 
         <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
-            <fa-icon icon="plus"></fa-icon> <span>Create a new User</span>
+            <fa-icon icon="plus"></fa-icon> <span>Nouveau utilisateur</span>
         </button>
     </h2>
 
@@ -50,7 +50,7 @@
                                     [routerLink]="['./', user.login, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline">View</span>
+<!--                                <span class="d-none d-md-inline">Détails</span>-->
                             </button>
 
                             <button type="submit"
@@ -58,13 +58,13 @@
                                     queryParamsHandling="merge"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline">Edit</span>
+<!--                                <span class="d-none d-md-inline">Modifier</span>-->
                             </button>
 
                             <button type="button" (click)="deleteUser(user)"
                                     class="btn btn-danger btn-sm" [disabled]="!currentAccount || currentAccount.login === user.login">
                                 <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline">Delete</span>
+<!--                                <span class="d-none d-md-inline">Delete</span>-->
                             </button>
                         </div>
                     </td>

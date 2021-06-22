@@ -3,8 +3,8 @@ import { Establishment } from 'app/establishment/establishment.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EstablishmentService } from 'app/establishment/establishment.service';
 import { UploadedFile } from 'app/menu-management/menu-file/uploaded-file.model';
-import { ActivatedRoute } from '@angular/router';
 import { User } from 'app/core/user/user.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-establishment',
@@ -19,15 +19,14 @@ export class EstablishmentComponent implements OnInit {
   public id!: number;
   public user!: User;
 
-  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private establishmentService: EstablishmentService) {
+  constructor(private fb: FormBuilder, private establishmentService: EstablishmentService, private activatedRoute: ActivatedRoute) {
     this.estabForm = this.createForm();
   }
 
   ngOnInit(): void {
-    // this.activatedRoute.params.subscribe(data => {
-    //   this.id = data['idUser'];
-
-    this.establishmentService.getEstablishmentsByCurrentUser(this.user.id).subscribe(value => {
+    // this.establishmentService.getAllEstablishments().subscribe(value => {
+    //   this.estabList = value;
+    this.establishmentService.getEstablishmentsByCurrentUser().subscribe(value => {
       this.estabList = value;
     });
   }
@@ -51,7 +50,7 @@ export class EstablishmentComponent implements OnInit {
     this.establishmentService.addEstablishment(establishment).subscribe(() => {
       this.estabForm.reset();
       this.logo = new UploadedFile();
-      this.establishmentService.getEstablishmentsByCurrentUser(this.id).subscribe(value => {
+      this.establishmentService.getEstablishmentsByCurrentUser().subscribe(value => {
         this.estabList = value;
       });
     });
@@ -69,7 +68,7 @@ export class EstablishmentComponent implements OnInit {
 
   public delete(id: any): void {
     this.establishmentService.deleteEstablishment(id).subscribe(() => {
-      this.establishmentService.getEstablishmentsByCurrentUser(this.id).subscribe(value => {
+      this.establishmentService.getEstablishmentsByCurrentUser().subscribe(value => {
         this.estabList = value;
       });
     });
