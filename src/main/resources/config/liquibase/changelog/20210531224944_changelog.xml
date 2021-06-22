@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Aya (generated)" id="1622501412657-1">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categoryPK"/>
+            </column>
+            <column name="level" type="BIGINT"/>
+            <column name="name" type="VARCHAR(256)"/>
+            <column name="digital_menu_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-2">
+        <addColumn tableName="product">
+            <column name="category_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-3">
+        <addColumn tableName="product">
+            <column name="level" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-4">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="product" constraintName="FK1mtsbur82frn64de7balymq9s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-5">
+        <addForeignKeyConstraint baseColumnNames="digital_menu_id" baseTableName="category" constraintName="FKlhn648u3c1slfnnulblpo7hag" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="digital_menu" validate="true"/>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-6">
+        <dropTable tableName="t_category"/>
+    </changeSet>
+    <changeSet author="Aya (generated)" id="1622501412657-7">
+        <dropColumn columnName="order" tableName="product"/>
+    </changeSet>
+</databaseChangeLog>
